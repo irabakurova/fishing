@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ручные воблеры и сочки для рыбалки. Изготовление на заказ.">
+    <title>Воблеры ручной работы | [Имя мастера]</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="/" class="logo">
+                <span class="logo__text">[LOGO]</span>
+            </a>
+            <nav class="nav">
+                <a href="#catalog" class="nav__link">Каталог</a>
+                <a href="#process" class="nav__link">Процесс</a>
+                <a href="#about" class="nav__link">О мастере</a>
+                <a href="#contacts" class="nav__link">Контакты</a>
+            </nav>
+            <button class="burger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero__container">
+            <div class="hero__content">
+                <h1 class="hero__title">Воблеры, <br>сделанные с душой</h1>
+                <p class="hero__subtitle">Каждая приманка — это история. От выпиливания до первого заброса. Ручная работа для тех, кто ценит качество.</p>
+                <div class="hero__buttons">
+                    <a href="#catalog" class="btn btn--primary">Смотреть каталог</a>
+                    <a href="https://t.me/username" target="_blank" class="btn btn--secondary">Написать в Telegram</a>
+                </div>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <span class="stat__number">4-6</span>
+                        <span class="stat__label">штук в месяц</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">100%</span>
+                        <span class="stat__label">ручная работа</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__image">
+                <!-- Здесь будет фото процесса или готового воблера -->
+                <div class="hero__placeholder">Фото мастерской</div>
+            </div>
+        </div>
+        <div class="hero__texture"></div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2 class="section-title">Каталог воблеров</h2>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="in-stock">В наличии</button>
+                <button class="filter-btn" data-filter="made-to-order">Под заказ</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be inserted here by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">Как создаётся воблер</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step__number">01</div>
+                    <h3 class="process-step__title">Выпиливание</h3>
+                    <p class="process-step__text">Подбор дерева, точная форма, балансировка</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">02</div>
+                    <h3 class="process-step__title">Вымачивание</h3>
+                    <p class="process-step__text">Специальный раствор для прочности</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">03</div>
+                    <h3 class="process-step__title">Покраска</h3>
+                    <p class="process-step__text">Ручная роспись, лак, детали</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">04</div>
+                    <h3 class="process-step__title">Тестирование</h3>
+                    <p class="process-step__text">Проверка игры на воде</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container about__container">
+            <div class="about__image">
+                <div class="about__placeholder">Фото мастера</div>
+            </div>
+            <div class="about__content">
+                <h2 class="section-title">О мастере</h2>
+                <p class="about__text">Привет! Я делаю воблеры своими руками в небольшой мастерской. Каждый воблер — это результат любви к рыбалке и желания создать идеальную приманку.</p>
+                <p class="about__text">Кроме воблеров, я также вяжу сочки из японской нитки — прочные и надёжные, чтобы трофей точно не ускользнул.</p>
+                <div class="about__socials">
+                    <a href="https://youtube.com" target="_blank" class="social-link">YouTube</a>
+                    <a href="https://t.me/username" target="_blank" class="social-link">Telegram</a>
+                    <a href="https://avito.ru" target="_blank" class="social-link">Avito</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Связаться</h2>
+            <div class="contacts-grid">
+                <a href="https://t.me/username" target="_blank" class="contact-card">
+                    <span class="contact-card__icon">✈️</span>
+                    <span class="contact-card__text">Telegram</span>
+                </a>
+                <a href="tel:+79999999999" class="contact-card">
+                    <span class="contact-card__icon">📞</span>
+                    <span class="contact-card__text">Позвонить</span>
+                </a>
+                <a href="https://avito.ru" target="_blank" class="contact-card">
+                    <span class="contact-card__icon">🛒</span>
+                    <span class="contact-card__text">Avito</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <p class="footer__text">© 2024 [Имя мастера]. Ручная работа с душой.</p>
+            <div class="footer__socials">
+                <a href="https://youtube.com" target="_blank">YouTube</a>
+                <a href="https://t.me/username" target="_blank">Telegram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
