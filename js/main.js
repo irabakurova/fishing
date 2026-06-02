@@ -193,14 +193,7 @@ function initHorizontalSlider() {
         slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
 
-    slider.addEventListener('scroll', () => {
-        const scrollLeft = slider.scrollLeft;
-        const index = Math.round(scrollLeft / scrollAmount);
-        
-        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-    });
+    // Пункт 4: убрали обновление точек, так как индикатор скрыт
 
     let isDown = false;
     let startX;
@@ -254,13 +247,27 @@ function enhanceProductCards() {
 }
 
 // ===== Render Products =====
-window.renderProducts = function(filter = 'all') {
+window.renderProducts = function(filter = 'in-stock') {
+    // Пункт 2: по умолчанию показываем "В наличии"
     const grid = document.getElementById('productsGrid');
     if (!grid || typeof products === 'undefined') return;
     
     let filtered = products;
-    if (filter === 'in-stock') filtered = products.filter(p => p.status === 'in-stock');
-    else if (filter === 'made-to-order') filtered = products.filter(p => p.status === 'made-to-order');
+    
+    // Пункт 2: сортировка — сначала "В наличии"
+    if (filter === 'in-stock') {
+        filtered = products.filter(p => p.status === 'in-stock');
+    } else if (filter === 'made-to-order') {
+        filtered = products.filter(p => p.status === 'made-to-order');
+    }
+    // filter === 'all' — показываем всё, но сортируем: в наличии первыми
+    
+    // Сортировка: в наличии всегда первыми
+    filtered = [...filtered].sort((a, b) => {
+        if (a.status === 'in-stock' && b.status !== 'in-stock') return -1;
+        if (a.status !== 'in-stock' && b.status === 'in-stock') return 1;
+        return 0;
+    });
     
     grid.innerHTML = filtered.map(product => {
         const images = Array.isArray(product.images) ? product.images : [product.image].filter(Boolean);
@@ -324,8 +331,16 @@ window.renderProducts = function(filter = 'all') {
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
+    // Пункт 2: по умолчанию загружаем "В наличии"
     if (typeof products !== 'undefined') {
-        window.renderProducts();
+        window.renderProducts('in-stock');
+        
+        // Обновляем активную кнопку фильтра
+        const defaultBtn = document.querySelector('.filter-btn[data-filter="in-stock"]');
+        if (defaultBtn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            defaultBtn.classList.add('active');
+        }
     }
     initProductGalleries();
     initScrollAnimations();

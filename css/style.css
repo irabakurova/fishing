@@ -199,6 +199,8 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .catalog--horizontal {
     overflow: hidden;
     padding: var(--spacing-xl) 0;
+    /* Пункт 3: убрали цветной край */
+    border: none;
 }
 
 .catalog__wrapper {
@@ -216,6 +218,8 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     scrollbar-color: var(--color-accent) var(--color-bg);
     padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 10px);
     margin: 0 calc(-1 * var(--spacing-md));
+    /* Пункт 3: убрали тень/бордер */
+    box-shadow: none;
 }
 
 .products-slider::-webkit-scrollbar {
@@ -266,11 +270,9 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .slider-nav--prev { left: 10px; }
 .slider-nav--next { right: 10px; }
 
+/* Пункт 4: убрали точки-индикаторы */
 .slider-indicator {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: var(--spacing-md);
+    display: none;
 }
 
 .slider-dot {
@@ -286,6 +288,37 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .slider-dot.active {
     background: var(--color-accent);
     transform: scale(1.3);
+}
+
+/* ===== Filters ===== */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 28px;
+    background: var(--color-white);
+    border: 2px solid transparent;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--color-dark);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* ===== Scroll Animations ===== */
@@ -495,10 +528,19 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
 /* ===== Process ===== */
-.process { padding: var(--spacing-xl) 0; position: relative; background: var(--color-white); }
+.process { 
+    padding: var(--spacing-xl) 0; 
+    position: relative; 
+    background: var(--color-white);
+    /* Пункт 5: волна теперь на весь блок */
+    overflow: hidden;
+}
 .process__bg {
-    position: absolute; top: 0; left: 0; right: 0; height: 100%;
-    z-index: 0; pointer-events: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
 }
 .process-steps {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -579,11 +621,22 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 
 /* ===== About ===== */
 .about { padding: var(--spacing-xl) 0; }
-.about__container { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--spacing-lg); align-items: center; }
+.about__container { 
+    display: grid; 
+    grid-template-columns: 1fr 1.2fr; 
+    gap: var(--spacing-lg); 
+    align-items: center; 
+}
 .about__image {
-    position: relative; height: 550px;
+    position: relative; 
+    height: 550px;
     background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-green) 100%);
-    border-radius: var(--radius-lg); overflow: hidden;
+    border-radius: var(--radius-lg); 
+    overflow: hidden;
+    /* Пункт 6: фикс для фото */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .about__placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
