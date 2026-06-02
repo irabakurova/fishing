@@ -1,64 +1,84 @@
-// Mobile menu toggle
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav');
+const products = [
+    {
+        id: 1,
+        name: "Минноу 90мм",
+        type: "minnow",
+        length: "90мм",
+        weight: "12г",
+        depth: "1.5-2м",
+        price: "1500",
+        status: "in-stock",
+        image: "img/products/lure-1.jpg",
+        description: "Классический минноу с отличной игрой"
+    },
+    {
+        id: 2,
+        name: "Крэнк 65мм",
+        type: "crank",
+        length: "65мм",
+        weight: "18г",
+        depth: "2-3м",
+        price: "1300",
+        status: "made-to-order",
+        image: "img/products/lure-2.jpg",
+        description: "Глубоководный крэнк с активной игрой"
+    },
+    {
+        id: 3,
+        name: "Поппер 80мм",
+        type: "popper",
+        length: "80мм",
+        weight: "15г",
+        depth: "поверхность",
+        price: "1400",
+        status: "in-stock",
+        image: "img/products/lure-3.jpg",
+        description: "Поверхностный поппер с громким чпоком"
+    }
+];
 
-if (burger) {
-    burger.addEventListener('click', () => {
-        nav.classList.toggle('nav--active');
-        burger.classList.toggle('burger--active');
-    });
-}
-
-// Filter buttons
-const filterBtns = document.querySelectorAll('.filter-btn');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add active to clicked
-        btn.classList.add('active');
-        
-        // Filter products
-        const filter = btn.dataset.filter;
-        if (typeof renderProducts === 'function') {
-            renderProducts(filter);
-        }
-    });
-});
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            // Close mobile menu if open
-            nav?.classList.remove('nav--active');
-            burger?.classList.remove('burger--active');
-        }
-    });
-});
-
-// Add scroll effect to header
-const header = document.querySelector('.header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+function renderProducts(filter = 'all') {
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
     
-    if (currentScroll > 100) {
-        header?.classList.add('header--scrolled');
-    } else {
-        header?.classList.remove('header--scrolled');
+    let filtered = products;
+    if (filter === 'in-stock') {
+        filtered = products.filter(p => p.status === 'in-stock');
+    } else if (filter === 'made-to-order') {
+        filtered = products.filter(p => p.status === 'made-to-order');
     }
     
-    lastScroll = currentScroll;
+    grid.innerHTML = filtered.map(product => `
+        <article class="product-card" data-status="${product.status}">
+            <div class="product-card__image">
+                <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'product-card__placeholder\'>📷<br>Фото воблера</div>'">
+                <span class="product-card__badge badge--${product.status}">
+                    ${product.status === 'in-stock' ? '✓ В наличии' : '⏳ Под заказ'}
+                </span>
+            </div>
+            <div class="product-card__content">
+                <h3 class="product-card__title">${product.name}</h3>
+                <div class="product-card__specs">
+                    <span class="spec">📏 ${product.length}</span>
+                    <span class="spec">⚖️ ${product.weight}</span>
+                    <span class="spec">🌊 ${product.depth}</span>
+                </div>
+                <p class="product-card__price">${product.price} ₽</p>
+                <div class="product-card__buttons">
+                    <a href="https://t.me/username?text=Здравствуйте! Хочу заказать: ${product.name}" target="_blank" class="product-card__btn product-card__btn--tg">
+                        <span>✈</span>
+                        <span>Заказать в Telegram</span>
+                    </a>
+                    <a href="https://avito.ru" target="_blank" class="product-card__btn product-card__btn--avito">
+                        <span>🛒</span>
+                        <span>Смотреть на Avito</span>
+                    </a>
+                </div>
+            </div>
+        </article>
+    `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
 });
