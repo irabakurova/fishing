@@ -1,7 +1,10 @@
 // ===== Loader =====
 window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.classList.add('hidden');
+        }
     }, 500);
 });
 
@@ -22,7 +25,7 @@ filterBtns.forEach(btn => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-        if (typeof renderProducts === 'function') renderProducts(filter);
+        if (typeof window.renderProducts === 'function') window.renderProducts(filter);
     });
 });
 
@@ -51,6 +54,8 @@ function initProductGalleries() {
         const dots = gallery.querySelectorAll('.product-gallery__dot');
         const counter = gallery.querySelector('.product-gallery__counter');
         
+        if (!track || slides.length === 0) return;
+        
         let currentIndex = 0;
         const totalSlides = slides.length;
         
@@ -65,19 +70,18 @@ function initProductGalleries() {
             updateGallery();
         }
         
-        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex - 1); });
-        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex + 1); });
+        if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex + 1); });
         
         dots.forEach((dot, i) => {
             dot.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(i); });
         });
         
-        // Open lightbox on image click
         slides.forEach(slide => {
             slide.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const img = slide.querySelector('img');
-                if (img) openLightbox(img.src, gallery.dataset.productName, slides, currentIndex);
+                if (img && typeof openLightbox === 'function') openLightbox(img.src, gallery.dataset.productName, slides, currentIndex);
             });
         });
         
@@ -104,40 +108,39 @@ function openLightbox(src, productName, slides, startIndex) {
     
     lightboxIndex = startIndex;
     updateLightbox();
-    lightbox.classList.add('active');
+    if (lightbox) lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function updateLightbox() {
-    if (lightboxImages[lightboxIndex]) {
+    if (lightboxImages[lightboxIndex] && lightboxImg) {
         lightboxImg.src = lightboxImages[lightboxIndex];
-        lightboxCaption.textContent = `Фото ${lightboxIndex + 1} из ${lightboxImages.length}`;
+        if (lightboxCaption) lightboxCaption.textContent = `Фото ${lightboxIndex + 1} из ${lightboxImages.length}`;
     }
 }
 
 function closeLightbox() {
-    lightbox.classList.remove('active');
+    if (lightbox) lightbox.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-lightboxClose?.addEventListener('click', closeLightbox);
-lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-lightboxPrev?.addEventListener('click', (e) => {
+if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => {
     e.stopPropagation();
     lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
     updateLightbox();
 });
 
-lightboxNext?.addEventListener('click', (e) => {
+if (lightboxNext) lightboxNext.addEventListener('click', (e) => {
     e.stopPropagation();
     lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
     updateLightbox();
 });
 
-// Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
+    if (!lightbox || !lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') { lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length; updateLightbox(); }
     if (e.key === 'ArrowRight') { lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; updateLightbox(); }
@@ -145,6 +148,8 @@ document.addEventListener('keydown', (e) => {
 
 // ===== Scroll Animations =====
 function initScrollAnimations() {
+    if (!('IntersectionObserver' in window)) return;
+    
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -165,7 +170,7 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in, .process-step, .material-card, .reveal').forEach(el => {
+    document.querySelectorAll('.fade-in, .process-step, .material-card').forEach(el => {
         observer.observe(el);
     });
 }
@@ -243,16 +248,15 @@ function initParallax() {
 // ===== Enhanced Product Card Animations =====
 function enhanceProductCards() {
     const cards = document.querySelectorAll('.product-card');
-    
     cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
     });
 }
 
 // ===== Render Products =====
-function renderProducts(filter = 'all') {
+window.renderProducts = function(filter = 'all') {
     const grid = document.getElementById('productsGrid');
-    if (!grid) return;
+    if (!grid || typeof products === 'undefined') return;
     
     let filtered = products;
     if (filter === 'in-stock') filtered = products.filter(p => p.status === 'in-stock');
@@ -316,14 +320,15 @@ function renderProducts(filter = 'all') {
         initProductGalleries();
         enhanceProductCards();
     }, 100);
-}
+};
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    if (typeof products !== 'undefined') renderProducts();
+    if (typeof products !== 'undefined') {
+        window.renderProducts();
+    }
     initProductGalleries();
     initScrollAnimations();
     initHorizontalSlider();
     initParallax();
-    enhanceProductCards();
 });
