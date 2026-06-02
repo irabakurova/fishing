@@ -19,7 +19,7 @@
     <header class="header">
         <div class="container header__container">
             <a href="/" class="logo">
-                <span class="logo__icon">🐟</span>
+                <span class="logo__icon"></span>
                 <span class="logo__text">РЫБА ГОРЫ ЛЕС</span>
             </a>
             <nav class="nav">
@@ -129,7 +129,7 @@
             <div class="products-grid" id="productsGrid"></div>
             
             <div class="catalog__note">
-                <span class="note__icon">💡</span>
+                <span class="note__icon"></span>
                 <p>Не нашли что искали? Напишите — обсудим изготовление под ваши задачи</p>
             </div>
         </div>
@@ -207,7 +207,7 @@
         <div class="container about__container">
             <div class="about__image">
                 <div class="about__placeholder">
-                    <div class="placeholder__icon">👨🔧</div>
+                    <div class="placeholder__icon">👨</div>
                     <span>Фото мастера</span>
                 </div>
                 <div class="about__deco">
@@ -255,6 +255,10 @@
                         <span class="social-link__icon">📷</span>
                         <span>Instagram</span>
                     </a>
+                    <a href="https://boosty.to/shustspb" target="_blank" class="social-link social-link--boosty">
+                        <span class="social-link__icon">❤</span>
+                        <span>Boosty</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -293,7 +297,7 @@
                         </svg>
                     </div>
                     <div class="contact-card__content">
-                        <span class="contact-card__title">Telegram</span>
+                        <span class="contact-card__title">Telegram Личный</span>
                         <span class="contact-card__text">@ShustSPB</span>
                     </div>
                     <span class="contact-card__arrow">→</span>
@@ -307,7 +311,7 @@
                         </svg>
                     </div>
                     <div class="contact-card__content">
-                        <span class="contact-card__title">Telegram канал</span>
+                        <span class="contact-card__title">Telegram Канал</span>
                         <span class="contact-card__text">Новости и обновления</span>
                     </div>
                     <span class="contact-card__arrow">→</span>
@@ -354,7 +358,7 @@
                     </div>
                     <span class="contact-card__arrow">→</span>
                 </a>
-                
+
                 <a href="https://boosty.to/shustspb" target="_blank" class="contact-card contact-card--boosty">
                     <div class="contact-card__icon">
                         <svg viewBox="0 0 60 60" fill="none">
@@ -383,4 +387,27 @@
             <div class="footer__socials">
                 <a href="https://www.youtube.com/@ShustSPB" target="_blank" class="footer__link">YouTube</a>
                 <a href="https://t.me/lllykaboy" target="_blank" class="footer__link">Telegram</a>
-                <a href
+                <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" target="_blank" class="footer__link">Avito</a>
+                <a href="https://boosty.to/shustspb" target="_blank" class="footer__link">Boosty</a>
+            </div>
+        </div>
+        <div class="footer__wave">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" fill="#1E3A5F"/>
+            </svg>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox__close" id="lightboxClose">&times;</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev">&#10094;</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext">&#10095;</button>
+        <img class="lightbox__img" id="lightboxImg" src="" alt="">
+        <div class="lightbox__caption" id="lightboxCaption"></div>
+    </div>
+
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ const products = [
         depth: "1.5-2м",
         price: "1500",
         status: "in-stock",
-        // Массив фото: от 1 до 3 штук
+        // ВАЖНО: Массив картинок
         images: [
             "img/products/lure-1-1.jpg",
             "img/products/lure-1-2.jpg",
@@ -42,21 +42,5 @@ const products = [
         status: "in-stock",
         images: ["img/products/lure-3-1.jpg"],
         description: "Сине-розовый с точками"
-    },
-    {
-        id: 4,
-        name: "Крэнк 65мм",
-        type: "crank",
-        length: "65мм",
-        weight: "18г",
-        depth: "2-3м",
-        price: "1300",
-        status: "made-to-order",
-        images: [
-            "img/products/lure-4-1.jpg",
-            "img/products/lure-4-2.jpg",
-            "img/products/lure-4-3.jpg"
-        ],
-        description: "Глубоководный крэнк с активной игрой"
     }
 ];
