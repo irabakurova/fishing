@@ -1,81 +1,210 @@
-const products = [
-    {
-        id: 1,
-        name: "Минноу 90мм",
-        type: "minnow",
-        length: "90мм",
-        weight: "12г",
-        depth: "1.5-2м",
-        price: "1500",
-        status: "in-stock", // in-stock или made-to-order
-        image: "img/products/lure-1.jpg",
-        description: "Классический минноу, отличная игра"
-    },
-    {
-        id: 2,
-        name: "Крэнк 65мм",
-        type: "crank",
-        length: "65мм",
-        weight: "18г",
-        depth: "2-3м",
-        price: "1300",
-        status: "made-to-order",
-        image: "img/products/lure-2.jpg",
-        description: "Глубоководный, активная игра"
-    },
-    {
-        id: 3,
-        name: "Поппер 80мм",
-        type: "popper",
-        length: "80мм",
-        weight: "15г",
-        depth: "поверхность",
-        price: "1400",
-        status: "in-stock",
-        image: "img/products/lure-3.jpg",
-        description: "Поверхностный, громкий чпок"
-    }
-    // Добавляй новые воблеры сюда
-];
+// ===== Mobile Menu =====
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav');
+if (burger) {
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('nav--active');
+        burger.classList.toggle('burger--active');
+    });
+}
 
-// Функция для рендера товаров
+// ===== Filter Buttons =====
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        if (typeof renderProducts === 'function') renderProducts(filter);
+    });
+});
+
+// ===== Smooth Scroll =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            nav?.classList.remove('nav--active');
+            burger?.classList.remove('burger--active');
+        }
+    });
+});
+
+// ===== Product Gallery (inside card) =====
+function initProductGalleries() {
+    document.querySelectorAll('.product-gallery').forEach(gallery => {
+        const track = gallery.querySelector('.product-gallery__track');
+        const slides = gallery.querySelectorAll('.product-gallery__slide');
+        const prevBtn = gallery.querySelector('.product-gallery__nav--prev');
+        const nextBtn = gallery.querySelector('.product-gallery__nav--next');
+        const dots = gallery.querySelectorAll('.product-gallery__dot');
+        const counter = gallery.querySelector('.product-gallery__counter');
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        
+        function updateGallery() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+            if (counter) counter.textContent = `${currentIndex + 1}/${totalSlides}`;
+        }
+        
+        function goToSlide(index) {
+            currentIndex = (index + totalSlides) % totalSlides;
+            updateGallery();
+        }
+        
+        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex - 1); });
+        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(currentIndex + 1); });
+        
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', (e) => { e.stopPropagation(); goToSlide(i); });
+        });
+        
+        // Open lightbox on image click
+        slides.forEach(slide => {
+            slide.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const img = slide.querySelector('img');
+                if (img) openLightbox(img.src, gallery.dataset.productName, slides, currentIndex);
+            });
+        });
+        
+        updateGallery();
+    });
+}
+
+// ===== Lightbox Modal =====
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function openLightbox(src, productName, slides, startIndex) {
+    // Collect all images from this product
+    lightboxImages = Array.from(slides).map(slide => {
+        const img = slide.querySelector('img');
+        return img ? img.src : null;
+    }).filter(src => src);
+    
+    lightboxIndex = startIndex;
+    updateLightbox();
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+    if (lightboxImages[lightboxIndex]) {
+        lightboxImg.src = lightboxImages[lightboxIndex];
+        lightboxCaption.textContent = `Фото ${lightboxIndex + 1} из ${lightboxImages.length}`;
+    }
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+lightboxClose?.addEventListener('click', closeLightbox);
+lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+lightboxPrev?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    updateLightbox();
+});
+
+lightboxNext?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+    updateLightbox();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; updateLightbox(); }
+});
+
+// ===== Render Products =====
 function renderProducts(filter = 'all') {
     const grid = document.getElementById('productsGrid');
     if (!grid) return;
     
     let filtered = products;
-    if (filter === 'in-stock') {
-        filtered = products.filter(p => p.status === 'in-stock');
-    } else if (filter === 'made-to-order') {
-        filtered = products.filter(p => p.status === 'made-to-order');
-    }
+    if (filter === 'in-stock') filtered = products.filter(p => p.status === 'in-stock');
+    else if (filter === 'made-to-order') filtered = products.filter(p => p.status === 'made-to-order');
     
-    grid.innerHTML = filtered.map(product => `
+    grid.innerHTML = filtered.map(product => {
+        // Handle images: can be string or array
+        const images = Array.isArray(product.images) ? product.images : [product.image].filter(Boolean);
+        const hasMultiple = images.length > 1;
+        
+        return `
         <article class="product-card" data-status="${product.status}">
-            <div class="product-card__image">
-                <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.textContent='Фото воблера'">
+            <div class="product-gallery" data-product-name="${product.name}">
+                <div class="product-gallery__track">
+                    ${images.map((img, i) => `
+                        <div class="product-gallery__slide">
+                            <img src="${img}" alt="${product.name} — фото ${i + 1}" 
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'product-gallery__placeholder\'>📷<br>Фото ${i + 1}</div>'">
+                        </div>
+                    `).join('')}
+                </div>
+                
+                ${hasMultiple ? `
+                <button class="product-gallery__nav product-gallery__nav--prev" aria-label="Предыдущее фото">&#10094;</button>
+                <button class="product-gallery__nav product-gallery__nav--next" aria-label="Следующее фото">&#10095;</button>
+                <div class="product-gallery__dots">
+                    ${images.map((_, i) => `<button class="product-gallery__dot ${i === 0 ? 'active' : ''}" aria-label="Фото ${i + 1}"></button>`).join('')}
+                </div>
+                <span class="product-gallery__counter">1/${images.length}</span>
+                ` : ''}
+                
+                <span class="product-card__badge badge--${product.status}">
+                    ${product.status === 'in-stock' ? '✓ В наличии' : '⏳ Под заказ'}
+                </span>
             </div>
+            
             <div class="product-card__content">
                 <h3 class="product-card__title">${product.name}</h3>
-                <p class="product-card__specs">${product.length}, ${product.weight}, ${product.depth}</p>
-                <span class="product-card__status status-${product.status}">
-                    ${product.status === 'in-stock' ? '✓ В наличии' : '⏳ Под заказ (7-14 дней)'}
-                </span>
+                <div class="product-card__specs">
+                    <span class="spec">📏 ${product.length}</span>
+                    <span class="spec">⚖️ ${product.weight}</span>
+                    <span class="spec">🌊 ${product.depth}</span>
+                </div>
                 <p class="product-card__price">${product.price} ₽</p>
                 <div class="product-card__buttons">
-                    <a href="https://t.me/username?text=Здравствуйте! Хочу заказать: ${product.name}" target="_blank" class="product-card__btn product-card__btn--tg">
-                        ✈️ Заказать в Telegram
+                    <a href="https://t.me/ShustSPB?text=Здравствуйте! Хочу заказать: ${encodeURIComponent(product.name)}" 
+                       target="_blank" class="product-card__btn product-card__btn--tg">
+                        <span>✈</span><span>Заказать в Telegram</span>
                     </a>
-                    <a href="https://avito.ru" target="_blank" class="product-card__btn product-card__btn--avito">
-                        🛒 Смотреть на Avito
+                    <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" 
+                       target="_blank" class="product-card__btn product-card__btn--avito">
+                        <span>🛒</span><span>Смотреть на Avito</span>
                     </a>
                 </div>
             </div>
-        </article>
-    `).join('');
+        </article>`;
+    }).join('');
+    
+    // Re-initialize galleries after render
+    setTimeout(initProductGalleries, 100);
 }
 
-// Инициализация
+// ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts();
+    if (typeof products !== 'undefined') renderProducts();
+    initProductGalleries();
 });
