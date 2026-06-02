@@ -176,13 +176,25 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     position: relative; height: 550px; background: var(--color-white);
     border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
 }
+/* НОВЫЕ СТИЛИ ДЛЯ ИЗОБРАЖЕНИЙ */
+.hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Не дает фото растянуться, обрезает лишнее */
+    object-position: center; /* Центрирует фото */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
 .hero__placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--color-text-light);
     background: linear-gradient(135deg, var(--color-water) 0%, var(--color-bg) 100%);
 }
 .placeholder__icon { font-size: 5rem; margin-bottom: var(--spacing-sm); opacity: 0.5; }
-.hero__deco { position: absolute; pointer-events: none; }
+.hero__deco { position: absolute; pointer-events: none; z-index: 1; }
 .hero__deco--1 {
     top: -30px; right: -30px; width: 150px; height: 150px;
     animation: rotate 20s linear infinite;
@@ -528,7 +540,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .process { 
     padding: var(--spacing-xl) 0; 
     position: relative; 
-    /* Исправление 2: Фон блока задан явно, чтобы не было белой полосы */
     background-color: #F8F9FA; 
     overflow: hidden;
 }
@@ -539,7 +550,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     z-index: 0;
     pointer-events: none;
 }
-/* Делаем SVG на всю высоту блока */
 .process__bg svg {
     width: 100%;
     height: 100%;
@@ -630,7 +640,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     gap: var(--spacing-lg); 
     align-items: center; 
 }
-/* Исправление 3: Фото жестко зафиксировано */
 .about__image-wrapper {
     position: relative;
     width: 100%;
@@ -648,6 +657,16 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     align-items: center;
     justify-content: center;
 }
+/* НОВЫЕ СТИЛИ ДЛЯ ФОТО МАСТЕРА */
+.about__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Не дает фото растянуться */
+    object-position: center; /* Центрирует лицо */
+    position: relative;
+    z-index: 1;
+}
+
 .about__placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--color-white);
