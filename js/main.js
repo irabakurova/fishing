@@ -147,7 +147,6 @@ function renderProducts(filter = 'all') {
     else if (filter === 'made-to-order') filtered = products.filter(p => p.status === 'made-to-order');
     
     grid.innerHTML = filtered.map(product => {
-        // Handle images: can be string or array
         const images = Array.isArray(product.images) ? product.images : [product.image].filter(Boolean);
         const hasMultiple = images.length > 1;
         
@@ -158,7 +157,7 @@ function renderProducts(filter = 'all') {
                     ${images.map((img, i) => `
                         <div class="product-gallery__slide">
                             <img src="${img}" alt="${product.name} — фото ${i + 1}" 
-                                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'product-gallery__placeholder\'>📷<br>Фото ${i + 1}</div>'">
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'product-gallery__placeholder\'><br>Фото ${i + 1}</div>'">
                         </div>
                     `).join('')}
                 </div>
@@ -173,22 +172,24 @@ function renderProducts(filter = 'all') {
                 ` : ''}
                 
                 <span class="product-card__badge badge--${product.status}">
-                    ${product.status === 'in-stock' ? '✓ В наличии' : '⏳ Под заказ'}
+                    ${product.status === 'in-stock' 
+                        ? (product.stockCount ? `✓ В наличии: ${product.stockCount}` : '✓ В наличии') 
+                        : '⏳ Под заказ'}
                 </span>
             </div>
             
             <div class="product-card__content">
                 <h3 class="product-card__title">${product.name}</h3>
                 <div class="product-card__specs">
-                    <span class="spec">📏 ${product.length}</span>
-                    <span class="spec">⚖️ ${product.weight}</span>
-                    <span class="spec">🌊 ${product.depth}</span>
+                    ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
+                    ${product.weight && product.weight !== '-' ? `<span class="spec">️ ${product.weight}</span>` : ''}
+                    ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
                 </div>
-                <p class="product-card__price">${product.price} ₽</p>
+                ${product.price && product.price !== '-' ? `<p class="product-card__price">${product.price} ₽</p>` : ''}
                 <div class="product-card__buttons">
-                    <a href="https://t.me/ShustSPB?text=Здравствуйте! Хочу заказать: ${encodeURIComponent(product.name)}" 
+                    <a href="https://t.me/ShustSPB?text=Здравствуйте! Интересует: ${encodeURIComponent(product.name)}" 
                        target="_blank" class="product-card__btn product-card__btn--tg">
-                        <span>✈</span><span>Заказать в Telegram</span>
+                        <span>✈</span><span>Узнать цену и заказать</span>
                     </a>
                     <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" 
                        target="_blank" class="product-card__btn product-card__btn--avito">
@@ -199,7 +200,6 @@ function renderProducts(filter = 'all') {
         </article>`;
     }).join('');
     
-    // Re-initialize galleries after render
     setTimeout(initProductGalleries, 100);
 }
 

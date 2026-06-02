@@ -344,6 +344,61 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
+/* ===== Materials Section ===== */
+.materials {
+    padding: var(--spacing-xl) 0;
+    background: var(--color-bg);
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.material-card {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.material-card__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-sm);
+    background: var(--color-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.material-card__icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+.material-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-dark);
+}
+
+.material-card__text {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
 /* ===== About ===== */
 .about { padding: var(--spacing-xl) 0; }
 .about__container { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--spacing-lg); align-items: center; }
@@ -389,6 +444,8 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .social-link--vk:hover { background: #3d5f8a; transform: translateY(-2px); }
 .social-link--instagram { background: #E4405F; color: white; }
 .social-link--instagram:hover { background: #c93550; transform: translateY(-2px); }
+.social-link--boosty { background: #F46C2A; color: white; }
+.social-link--boosty:hover { background: #d85a1b; transform: translateY(-2px); }
 
 /* ===== CTA Section ===== */
 .cta { padding: var(--spacing-lg) 0; background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-green) 100%); }

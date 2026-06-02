@@ -1,46 +1,66 @@
 const products = [
     {
         id: 1,
-        name: "Минноу 90мм #1",
+        name: "Воблер шкатулка / Casket",
         type: "minnow",
-        length: "90мм",
-        weight: "12г",
-        depth: "1.5-2м",
-        price: "1500",
-        status: "in-stock",
-        // ВАЖНО: Массив картинок
+        length: "63мм",
+        weight: "6.5г",
+        depth: "-",
+        price: "-",
+        status: "made-to-order",
         images: [
             "img/products/lure-1-1.jpg",
             "img/products/lure-1-2.jpg",
             "img/products/lure-1-3.jpg"
         ],
-        description: "Классический минноу с отличной игрой"
+        description: "Компактный воблер с уникальной игрой"
     },
     {
         id: 2,
-        name: "Минноу 90мм #2",
+        name: "Caterpillar",
         type: "minnow",
-        length: "90мм",
-        weight: "12г",
-        depth: "1.5-2м",
-        price: "1500",
+        length: "-",
+        weight: "-",
+        depth: "-",
+        price: "-",
         status: "in-stock",
+        stockCount: "1 шт",
         images: [
             "img/products/lure-2-1.jpg",
-            "img/products/lure-2-2.jpg"
+            "img/products/lure-2-2.jpg",
+            "img/products/lure-2-3.jpg"
         ],
-        description: "Розовый с зелёными полосами"
+        description: "В наличии"
     },
     {
         id: 3,
-        name: "Минноу 90мм #3",
+        name: "Bowie 50mm",
         type: "minnow",
-        length: "90мм",
-        weight: "12г",
-        depth: "1.5-2м",
-        price: "1500",
-        status: "in-stock",
-        images: ["img/products/lure-3-1.jpg"],
-        description: "Сине-розовый с точками"
+        length: "50мм",
+        weight: "-",
+        depth: "-",
+        price: "-",
+        status: "made-to-order",
+        images: [
+            "img/products/lure-3-1.jpg",
+            "img/products/lure-3-2.jpg",
+            "img/products/lure-3-3.jpg"
+        ],
+        description: "Классическая форма для универсальной ловли"
+    },
+    {
+        id: 4,
+        name: "Eden 60",
+        type: "minnow",
+        length: "60мм",
+        weight: "-",
+        depth: "-",
+        price: "-",
+        status: "made-to-order",
+        images: [
+            "img/products/lure-4-1.jpg",
+            "img/products/lure-4-2.jpg"
+        ],
+        description: "Проверенная классика"
     }
 ];
