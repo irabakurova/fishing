@@ -193,8 +193,6 @@ function initHorizontalSlider() {
         slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
 
-    // Пункт 4: убрали обновление точек, так как индикатор скрыт
-
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -225,11 +223,12 @@ function initHorizontalSlider() {
     });
 }
 
-// ===== Parallax Effect =====
+// ===== Parallax Effect (DISABLED for About Image to fix "flying away" issue) =====
 function initParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.parallax');
+        // Исключаем about__image-wrapper из параллакса, чтобы фото не улетало
+        const parallaxElements = document.querySelectorAll('.parallax:not(.about__image-wrapper)');
         
         parallaxElements.forEach(el => {
             const speed = el.dataset.speed || 0.5;
@@ -247,22 +246,21 @@ function enhanceProductCards() {
 }
 
 // ===== Render Products =====
-window.renderProducts = function(filter = 'in-stock') {
-    // Пункт 2: по умолчанию показываем "В наличии"
+window.renderProducts = function(filter = 'all') {
     const grid = document.getElementById('productsGrid');
     if (!grid || typeof products === 'undefined') return;
     
     let filtered = products;
     
-    // Пункт 2: сортировка — сначала "В наличии"
+    // Логика фильтрации
     if (filter === 'in-stock') {
         filtered = products.filter(p => p.status === 'in-stock');
     } else if (filter === 'made-to-order') {
         filtered = products.filter(p => p.status === 'made-to-order');
     }
-    // filter === 'all' — показываем всё, но сортируем: в наличии первыми
+    // Если 'all' - берем все
     
-    // Сортировка: в наличии всегда первыми
+    // Сортировка: в наличии всегда первыми (даже в режиме "Все")
     filtered = [...filtered].sort((a, b) => {
         if (a.status === 'in-stock' && b.status !== 'in-stock') return -1;
         if (a.status !== 'in-stock' && b.status === 'in-stock') return 1;
@@ -297,7 +295,7 @@ window.renderProducts = function(filter = 'in-stock') {
                 <span class="product-card__badge badge--${product.status}">
                     ${product.status === 'in-stock' 
                         ? (product.stockCount ? `✓ В наличии: ${product.stockCount}` : '✓ В наличии') 
-                        : '⏳ Под заказ'}
+                        : ' Под заказ'}
                 </span>
             </div>
             
@@ -331,12 +329,12 @@ window.renderProducts = function(filter = 'in-stock') {
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Пункт 2: по умолчанию загружаем "В наличии"
+    // Исправление 1: По умолчанию загружаем ВСЕ товары
     if (typeof products !== 'undefined') {
-        window.renderProducts('in-stock');
+        window.renderProducts('all');
         
-        // Обновляем активную кнопку фильтра
-        const defaultBtn = document.querySelector('.filter-btn[data-filter="in-stock"]');
+        // Обновляем активную кнопку фильтра (ставим на "Все")
+        const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
         if (defaultBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             defaultBtn.classList.add('active');

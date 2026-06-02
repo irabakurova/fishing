@@ -199,7 +199,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .catalog--horizontal {
     overflow: hidden;
     padding: var(--spacing-xl) 0;
-    /* Пункт 3: убрали цветной край */
     border: none;
 }
 
@@ -218,7 +217,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     scrollbar-color: var(--color-accent) var(--color-bg);
     padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 10px);
     margin: 0 calc(-1 * var(--spacing-md));
-    /* Пункт 3: убрали тень/бордер */
     box-shadow: none;
 }
 
@@ -270,7 +268,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .slider-nav--prev { left: 10px; }
 .slider-nav--next { right: 10px; }
 
-/* Пункт 4: убрали точки-индикаторы */
 .slider-indicator {
     display: none;
 }
@@ -527,20 +524,26 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process ===== */
+/* ===== Process Section (FIXED) ===== */
 .process { 
     padding: var(--spacing-xl) 0; 
     position: relative; 
-    background: var(--color-white);
-    /* Пункт 5: волна теперь на весь блок */
+    /* Исправление 2: Фон блока задан явно, чтобы не было белой полосы */
+    background-color: #F8F9FA; 
     overflow: hidden;
 }
 .process__bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    height: auto;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
+}
+/* Делаем SVG на всю высоту блока */
+.process__bg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 .process-steps {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -619,7 +622,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     line-height: 1.7;
 }
 
-/* ===== About ===== */
+/* ===== About Section (FIXED) ===== */
 .about { padding: var(--spacing-xl) 0; }
 .about__container { 
     display: grid; 
@@ -627,13 +630,20 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     gap: var(--spacing-lg); 
     align-items: center; 
 }
+/* Исправление 3: Фото жестко зафиксировано */
+.about__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
 .about__image {
     position: relative; 
+    width: 100%;
     height: 550px;
     background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-green) 100%);
     border-radius: var(--radius-lg); 
     overflow: hidden;
-    /* Пункт 6: фикс для фото */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -644,7 +654,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .about__deco {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 400px; height: 400px; pointer-events: none;
+    width: 400px; height: 400px; pointer-events: none; z-index: 0;
 }
 .about__badge {
     display: inline-block; padding: 8px 16px; background: rgba(230, 126, 34, 0.1);
