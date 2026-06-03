@@ -11,20 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
-    
-    <style>
-        .loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #F8F4E8; display: flex; align-items: center; justify-content: center;
-            z-index: 9999; transition: opacity 0.5s ease;
-        }
-        .loader.hidden { opacity: 0; pointer-events: none; }
-        .loader__fish { font-size: 4rem; animation: swim 1s ease-in-out infinite; }
-    </style>
 </head>
 <body>
-    <div class="loader" id="loader"><div class="loader__fish">🎣</div></div>
-
     <header class="header">
         <div class="container header__container">
             <a href="/" class="logo"><span class="logo__icon"></span><span class="logo__text">РЫБА ГОРЫ ЛЕС</span></a>
@@ -66,7 +54,7 @@
             </div>
             <div class="hero__visual parallax" data-speed="0.3">
                 <div class="hero__image-wrapper">
-                    <img src="img/hero/workshop.jpg" alt="Мастерская ShustSPB" class="hero__img">
+                    <img src="img/hero/workshop.jpg" alt="Мастерская ShustSPB" class="hero__img" loading="lazy">
                     <div class="hero__deco hero__deco--1"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" stroke="#D4A574" stroke-width="2" stroke-dasharray="8 4"/></svg></div>
                     <div class="hero__deco hero__deco--2"><svg viewBox="0 0 60 60" fill="none"><path d="M30 5L35 25L55 30L35 35L30 55L25 35L5 30L25 25L30 5Z" fill="#E67E22" opacity="0.2"/></svg></div>
                 </div>
@@ -90,7 +78,7 @@
             <button class="slider-nav slider-nav--prev" aria-label="Предыдущие товары">&#10094;</button>
             <button class="slider-nav slider-nav--next" aria-label="Следующие товары">&#10095;</button>
             <div class="products-slider" id="productsGrid"></div>
-            <div class="catalog__note fade-in"><span class="note__icon"></span><p>Не нашли что искали? Напишите — обсудим изготовление под ваши задачи</p></div>
+            <div class="catalog__note fade-in"><span class="note__icon">💡</span><p>Не нашли что искали? Напишите — обсудим изготовление под ваши задачи</p></div>
         </div>
     </section>
 
@@ -150,7 +138,7 @@
         <div class="container about__container">
             <div class="about__image-wrapper">
                 <div class="about__image">
-                    <img src="img/about/master.jpg" alt="Мастер ShustSPB за работой" class="about__img">
+                    <img src="img/about/master.jpg" alt="Мастер ShustSPB за работой" class="about__img" loading="lazy">
                 </div>
                 <div class="about__deco"><svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" stroke="#D4A574" stroke-width="1" opacity="0.3"/><circle cx="50" cy="50" r="35" stroke="#D4A574" stroke-width="1" opacity="0.3"/></svg></div>
             </div>
@@ -223,7 +211,7 @@
         <div class="lightbox__caption" id="lightboxCaption"></div>
     </div>
 
-    <script src="data/products.js"></script>
-    <script src="js/main.js"></script>
+    <script src="data/products.js" defer></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

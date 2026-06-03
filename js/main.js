@@ -1,11 +1,3 @@
-// ===== Loader =====
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hidden');
-    }, 500);
-});
-
 // ===== Mobile Menu (ИСПРАВЛЕНО) =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
@@ -16,6 +8,7 @@ if (burger) {
         document.body.style.overflow = isActive ? 'hidden' : '';
     });
 }
+
 // Закрываем меню при клике на любую ссылку
 document.querySelectorAll('.nav__link').forEach(link => {
     link.addEventListener('click', () => {
@@ -188,9 +181,9 @@ window.renderProducts = function(filter = 'all') {
             <div class="product-card__content">
                 <h3 class="product-card__title">${product.name}</h3>
                 <div class="product-card__specs">
-                    ${product.length && product.length !== '-' ? `<span class="spec"> ${product.length}</span>` : ''}
+                    ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
                     ${product.weight && product.weight !== '-' ? `<span class="spec">⚖️ ${product.weight}</span>` : ''}
-                    ${product.depth && product.depth !== '-' ? `<span class="spec"> ${product.depth}</span>` : ''}
+                    ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
                 </div>
                 <div class="product-card__buttons">
                     <a href="https://t.me/ShustSPB?text=Здравствуйте! Интересует: ${encodeURIComponent(product.name)}" target="_blank" class="product-card__btn product-card__btn--tg"><span>✈</span><span>Узнать цену и заказать</span></a>
