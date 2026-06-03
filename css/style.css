@@ -42,7 +42,7 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     font-weight: 400;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Важно: убирает горизонтальный скролл */
 }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -176,18 +176,16 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     position: relative; height: 550px; background: var(--color-white);
     border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
 }
-/* НОВЫЕ СТИЛИ ДЛЯ ИЗОБРАЖЕНИЙ */
 .hero__img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Не дает фото растянуться, обрезает лишнее */
-    object-position: center; /* Центрирует фото */
+    object-fit: cover;
+    object-position: center;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
 }
-
 .hero__placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--color-text-light);
@@ -211,7 +209,8 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .catalog--horizontal {
     overflow: hidden;
     padding: var(--spacing-xl) 0;
-    border: none;
+    border: none !important; /* УБРАЛИ БОРОТКИ */
+    background: var(--color-bg);
 }
 
 .catalog__wrapper {
@@ -228,7 +227,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     scrollbar-width: thin;
     scrollbar-color: var(--color-accent) var(--color-bg);
     padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 10px);
-    margin: 0 calc(-1 * var(--spacing-md));
+    margin: 0 calc(-1 * var(--spacing-md)); /* Тянем на всю ширину */
     box-shadow: none;
 }
 
@@ -282,21 +281,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 
 .slider-indicator {
     display: none;
-}
-
-.slider-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-sand);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.slider-dot.active {
-    background: var(--color-accent);
-    transform: scale(1.3);
 }
 
 /* ===== Filters ===== */
@@ -536,17 +520,19 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section (FIXED) ===== */
+/* ===== Process Section (ИСПРАВЛЕНО) ===== */
 .process { 
     padding: var(--spacing-xl) 0; 
     position: relative; 
-    background-color: #F8F9FA; 
-    overflow: hidden;
+    background-color: var(--color-bg); /* Цвет фона блока */
+    overflow: hidden; /* Обрезаем всё лишнее */
+    margin-bottom: 0; /* Убираем отступ снизу */
 }
 .process__bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    height: 100%;
+    height: 100%; /* ЖЕСТКАЯ ВЫСОТА */
+    width: 100%;
     z-index: 0;
     pointer-events: none;
 }
@@ -632,7 +618,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     line-height: 1.7;
 }
 
-/* ===== About Section (FIXED) ===== */
+/* ===== About Section ===== */
 .about { padding: var(--spacing-xl) 0; }
 .about__container { 
     display: grid; 
@@ -657,16 +643,14 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     align-items: center;
     justify-content: center;
 }
-/* НОВЫЕ СТИЛИ ДЛЯ ФОТО МАСТЕРА */
 .about__img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Не дает фото растянуться */
-    object-position: center; /* Центрирует лицо */
+    object-fit: cover;
+    object-position: center;
     position: relative;
     z-index: 1;
 }
-
 .about__placeholder {
     width: 100%; height: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--color-white);
@@ -755,8 +739,14 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     padding: var(--spacing-lg) 0 var(--spacing-md);
     background: var(--color-dark); color: var(--color-white);
     position: relative;
+    margin-top: 0; /* Убираем отступ сверху */
 }
-.footer__wave { position: absolute; top: -60px; left: 0; right: 0; }
+.footer__wave { 
+    position: absolute; 
+    top: -79px; /* Подтягиваем волну выше, чтобы перекрыть стык */
+    left: 0; right: 0; 
+    line-height: 0; /* Убираем микро-отступы */
+}
 .footer__container {
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 1;

@@ -223,7 +223,7 @@ function initHorizontalSlider() {
     });
 }
 
-// ===== Parallax Effect (DISABLED for About Image to fix "flying away" issue) =====
+// ===== Parallax Effect =====
 function initParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -295,7 +295,7 @@ window.renderProducts = function(filter = 'all') {
                 <span class="product-card__badge badge--${product.status}">
                     ${product.status === 'in-stock' 
                         ? (product.stockCount ? `✓ В наличии: ${product.stockCount}` : '✓ В наличии') 
-                        : ' Под заказ'}
+                        : '⏳ Под заказ'}
                 </span>
             </div>
             
@@ -303,7 +303,7 @@ window.renderProducts = function(filter = 'all') {
                 <h3 class="product-card__title">${product.name}</h3>
                 <div class="product-card__specs">
                     ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
-                    ${product.weight && product.weight !== '-' ? `<span class="spec">⚖️ ${product.weight}</span>` : ''}
+                    ${product.weight && product.weight !== '-' ? `<span class="spec">️ ${product.weight}</span>` : ''}
                     ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
                 </div>
                 ${product.price && product.price !== '-' ? `<p class="product-card__price">${product.price} ₽</p>` : ''}
@@ -329,11 +329,11 @@ window.renderProducts = function(filter = 'all') {
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Исправление 1: По умолчанию загружаем ВСЕ товары
+    // Инициализируем каталог со всеми товарами
     if (typeof products !== 'undefined') {
         window.renderProducts('all');
         
-        // Обновляем активную кнопку фильтра (ставим на "Все")
+        // Убеждаемся, что кнопка "Все" активна
         const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
         if (defaultBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
