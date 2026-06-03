@@ -32,7 +32,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== Reset & Base ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
@@ -41,7 +40,6 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     font-weight: 400;
-    /* ИСПРАВЛЕНИЕ: Запрещаем горизонтальный скролл глобально */
     overflow-x: hidden;
     width: 100%;
 }
@@ -49,7 +47,6 @@ section { margin: 0; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 
-/* ===== Utilities ===== */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); }
 .section-header { text-align: center; margin-bottom: var(--spacing-lg); }
 .section-title {
@@ -63,7 +60,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .section-title--left { text-align: left; }
 .section-subtitle { font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto; }
 
-/* ===== Buttons ===== */
 .btn {
     display: inline-flex; align-items: center; justify-content: center;
     gap: var(--spacing-xs); padding: 14px 28px;
@@ -93,7 +89,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .btn--header { background: var(--color-dark); color: var(--color-white); }
 .btn--header:hover { background: var(--color-accent); }
 
-/* ===== Header ===== */
 .header {
     position: fixed; top: 0; left: 0; right: 0;
     background: rgba(248, 244, 232, 0.98);
@@ -109,7 +104,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .logo__text--footer { font-size: 1.4rem; color: var(--color-white); }
 
-/* Desktop Nav */
 .nav { display: flex; gap: var(--spacing-md); align-items: center; }
 .nav__link {
     font-size: 0.95rem; font-weight: 500; color: var(--color-text);
@@ -123,7 +117,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .nav__link:hover { color: var(--color-accent); }
 .nav__link:hover::after { width: 100%; }
 
-/* Burger Button */
 .burger {
     display: none; flex-direction: column; gap: 5px;
     background: none; border: none; cursor: pointer; padding: var(--spacing-xs);
@@ -134,7 +127,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     transition: var(--transition); display: block; border-radius: 2px;
 }
 
-/* ===== Mobile Menu ===== */
 .nav--active {
     display: flex !important;
     flex-direction: column;
@@ -159,14 +151,12 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     text-align: center;
 }
 
-/* Burger Animation */
 .burger--active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .burger--active span:nth-child(2) { opacity: 0; }
 .burger--active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ===== Hero Section ===== */
 .hero {
     min-height: 100vh; display: flex; align-items: center;
     padding: calc(var(--spacing-xl) + 80px) 0 var(--spacing-lg);
@@ -235,7 +225,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .hero__fish--1 { top: 20%; left: 10%; animation: swim 8s ease-in-out infinite, float 6s ease-in-out infinite; }
 .hero__fish--2 { bottom: 25%; right: 8%; animation: swim 10s ease-in-out infinite reverse, float 7s ease-in-out infinite 1s; }
 
-/* ===== Catalog Horizontal ===== */
 .catalog--horizontal {
     padding: var(--spacing-xl) 0;
     background: var(--color-bg);
@@ -282,7 +271,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .slider-nav--prev { left: 10px; }
 .slider-nav--next { right: 10px; }
 
-/* ===== Filters ===== */
 .filters {
     display: flex; justify-content: center; gap: var(--spacing-sm);
     margin-bottom: var(--spacing-lg); flex-wrap: wrap;
@@ -299,13 +287,11 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     transform: translateY(-2px); box-shadow: var(--shadow-md);
 }
 
-/* ===== Scroll Animations ===== */
 .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 .stagger-item.visible { opacity: 1; transform: translateY(0); }
 
-/* ===== Animations ===== */
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
@@ -333,7 +319,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .product-card:hover .product-gallery__slide img { transform: scale(1.1) rotate(2deg); }
 .parallax { will-change: transform; }
 
-/* ===== Product Card ===== */
 .product-card {
     background: var(--color-white); border-radius: var(--radius-md);
     overflow: hidden; box-shadow: var(--shadow-md);
@@ -421,12 +406,11 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section ===== */
 .process { 
     position: relative; 
     padding: var(--spacing-xl) 0; 
     background: var(--color-bg);
-    overflow: hidden !important; /* Чтобы рыбки не вызывали скролл */
+    overflow: hidden !important;
     width: 100%;
 }
 .process__bg {
@@ -460,7 +444,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== Swimming Fish Animation ===== */
 .swimming-fish {
     position: absolute;
     width: 70px;
@@ -512,7 +495,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     50% { margin-top: -3px; }
 }
 
-/* ===== Reviews Section ===== */
 .reviews { padding: var(--spacing-xl) 0; background: var(--color-white); position: relative; overflow: hidden; }
 .reviews--horizontal .reviews-slider {
     display: flex;
@@ -548,7 +530,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .review-card__product { font-size: 0.85rem; color: var(--color-accent); font-weight: 500; }
 .review-card__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; font-style: italic; }
 
-/* ===== FAQ Section (ИСПРАВЛЕНО: ВОЗВРАТ К ПОТОКУ) ===== */
+/* ===== FAQ Section (СТАТИЧНЫЙ) ===== */
 .faq { padding: var(--spacing-xl) 0; background: var(--color-bg); }
 .faq-grid {
     display: flex;
@@ -563,39 +545,21 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     background: var(--color-white);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    overflow: hidden; /* Снова скрываем, чтобы скругления работали */
-    position: relative;
-    transition: box-shadow 0.3s ease;
+    padding: var(--spacing-md);
 }
 .faq-question {
-    width: 100%; padding: var(--spacing-md); background: none; border: none;
-    display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; font-family: var(--font-body); font-size: 1.05rem; font-weight: 500;
-    color: var(--color-dark); text-align: left;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-sm);
 }
-.faq-question:hover { color: var(--color-accent); }
-.faq-icon {
-    width: 30px; height: 30px; border-radius: 50%; background: var(--color-bg);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; font-weight: 300; transition: var(--transition); flex-shrink: 0;
+.faq-answer p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
-.faq-item.active .faq-icon { transform: rotate(45deg); background: var(--color-accent); color: white; }
 
-/* ИСПРАВЛЕНИЕ: Ответ теперь снова в потоке, но с анимацией высоты */
-.faq-answer {
-    max-height: 0; 
-    overflow: hidden; 
-    transition: max-height 0.4s ease-out;
-    padding: 0 var(--spacing-md);
-}
-.faq-item.active .faq-answer { 
-    /* Достаточно большая высота, чтобы вместить текст */
-    max-height: 500px; 
-    padding-bottom: var(--spacing-md); 
-}
-.faq-answer p { color: var(--color-text-light); line-height: 1.6; }
-
-/* ===== Materials Section ===== */
 .materials { padding: var(--spacing-xl) 0; background: var(--color-bg); }
 .materials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); }
 .material-card {
@@ -615,7 +579,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .material-card__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== About Section ===== */
 .about { padding: var(--spacing-xl) 0; }
 .about__container { 
     display: grid; grid-template-columns: 1fr 1.2fr; 
@@ -668,7 +631,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .social-link--boosty { background: #F46C2A; color: white; }
 .social-link--boosty:hover { background: #d85a1b; transform: translateY(-2px); }
 
-/* ===== CTA Section ===== */
 .cta { padding: var(--spacing-lg) 0; background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-green) 100%); }
 .cta__box {
     display: flex; justify-content: space-between; align-items: center; gap: var(--spacing-lg);
@@ -683,7 +645,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .cta__text { font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); }
 
-/* ===== Contacts ===== */
 .contacts { padding: var(--spacing-xl) 0; background: var(--color-white); }
 .contacts-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -711,15 +672,13 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .contact-card__arrow { font-size: 1.5rem; color: var(--color-text-light); transition: var(--transition); }
 .contact-card:hover .contact-card__arrow { color: var(--color-accent); transform: translateX(4px); }
 
-/* ===== Footer ===== */
 .footer {
     position: relative;
     padding: 6rem 0 2rem; 
     background: var(--color-dark);
     color: var(--color-white);
     margin-top: 0;
-    /* ИСПРАВЛЕНИЕ: Убрали overflow hidden, чтобы волна (которая торчит вверх) была видна */
-    overflow: visible; 
+    overflow: visible;
 }
 .footer__wave {
     position: absolute;
@@ -741,7 +700,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .footer__link { font-size: 0.95rem; opacity: 0.8; font-weight: 500; }
 .footer__link:hover { opacity: 1; color: var(--color-accent); }
 
-/* ===== Lightbox Modal ===== */
 .lightbox {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0, 0, 0, 0.9); z-index: 2000;
@@ -775,7 +733,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* ===== Responsive ===== */
 @media (max-width: 968px) {
     .nav { display: none; }
     .btn--header { display: none; }
