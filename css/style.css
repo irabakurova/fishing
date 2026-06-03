@@ -44,7 +44,7 @@ body {
     font-weight: 400;
     overflow-x: hidden;
 }
-section { margin: 0; padding: 0; }
+section { margin: 0; }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 
@@ -194,19 +194,16 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .hero__fish--1 { top: 20%; left: 10%; animation: swim 8s ease-in-out infinite, float 6s ease-in-out infinite; }
 .hero__fish--2 { bottom: 25%; right: 8%; animation: swim 10s ease-in-out infinite reverse, float 7s ease-in-out infinite 1s; }
 
-/* ===== Catalog Horizontal (ИСПРАВЛЕНО: УБРАНЫ БОРТИКИ) ===== */
+/* ===== Catalog Horizontal ===== */
 .catalog--horizontal {
     padding: var(--spacing-xl) 0;
     background: var(--color-bg);
-    overflow: hidden; /* Скрывает выступающие края */
+    overflow: hidden;
 }
-
 .catalog__wrapper {
     position: relative;
-    /* Разрешаем слайдеру выходить за границы контейнера */
     overflow: visible !important; 
 }
-
 .products-slider {
     display: flex;
     gap: var(--spacing-md);
@@ -216,45 +213,29 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /* Выносим слайдер за пределы контейнера на величину padding страницы */
     margin-left: calc(-1 * var(--spacing-md));
     margin-right: calc(-1 * var(--spacing-md));
     padding: 20px var(--spacing-md);
-    /* ЖЕСТКОЕ УДАЛЕНИЕ ВСЕХ РАМОК И ФОНОВ */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
     background: transparent !important;
 }
 .products-slider::-webkit-scrollbar { display: none; }
-
 .products-slider .product-card {
     flex: 0 0 320px;
     scroll-snap-align: start;
     margin-bottom: 0;
-    /* Убираем рамки у самих карточек */
     border: none !important;
     outline: none !important;
     box-shadow: var(--shadow-md);
 }
-
 .slider-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--color-white);
-    border: 2px solid var(--color-dark);
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    z-index: 10;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--color-white); border: 2px solid var(--color-dark);
+    font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-md); transition: var(--transition); z-index: 10;
 }
 .slider-nav:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
 .slider-nav--prev { left: 10px; }
@@ -399,7 +380,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section (ИСПРАВЛЕНО: ВОЛНА ВНИЗУ) ===== */
+/* ===== Process Section ===== */
 .process { 
     position: relative; 
     padding: var(--spacing-xl) 0; 
@@ -556,27 +537,34 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 /* ===== Footer (ИСПРАВЛЕНО: ВОЛНА ВОЗВРАЩЕНА) ===== */
 .footer {
     position: relative;
-    padding: 5rem 0 2rem; /* Больше отступа сверху, чтобы волна не наезжала на текст */
+    /* Увеличиваем отступ сверху, чтобы волна не перекрывала текст */
+    padding: 6rem 0 2rem; 
     background: var(--color-dark);
     color: var(--color-white);
     margin-top: 0;
-    overflow: visible; /* Разрешаем волне выходить за пределы, если нужно */
+    overflow: visible; /* Разрешаем волне выходить, если нужно */
 }
+
 .footer__wave {
     position: absolute;
-    top: -1px; /* Прижимаем к самому верху */
-    left: 0; right: 0;
+    /* Ставим волну в самый верх блока */
+    top: 0; 
+    left: 0; 
+    right: 0;
+    /* Сдвигаем волну чуть вверх, чтобы она "наезжала" на предыдущий блок */
+    transform: translateY(-99%); 
     line-height: 0;
-    z-index: 10;
+    z-index: 10; /* Поверх фона подвала */
 }
 .footer__wave svg {
     display: block;
     width: 100%;
     height: auto;
 }
+
 .footer__container {
     display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 11;
+    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 11; /* Текст поверх волны */
 }
 .footer__left { display: flex; flex-direction: column; gap: var(--spacing-xs); }
 .footer__text { font-size: 0.9rem; opacity: 0.7; }
