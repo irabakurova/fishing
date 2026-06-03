@@ -12,7 +12,6 @@ window.addEventListener('load', () => {
     }, 300); // Показываем минимум 300мс
 });
 
-
 // ===== Mobile Menu (ИСПРАВЛЕНО) =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
