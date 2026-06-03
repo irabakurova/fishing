@@ -7,8 +7,7 @@ const products = [
         weight: "6.5г",
         depth: "0.5-1.2м",
         price: "1599",
-        status: "in-stock",
-        stockCount: "1 шт",
+        status: "made-to-order",
         images: [
             "img/products/lure-1-1.jpg",
             "img/products/lure-1-2.jpg",
@@ -24,7 +23,8 @@ const products = [
         weight: "6.5г",
         depth: "0.8-1.5м",
         price: "1599",
-        status: "made-to-order",
+        status: "in-stock",
+        stockCount: "1 шт",
         images: [
             "img/products/lure-2-1.jpg",
             "img/products/lure-2-2.jpg",

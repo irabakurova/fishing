@@ -1,4 +1,3 @@
-// ===== Loader =====
 window.addEventListener('load', () => {
     setTimeout(() => {
         const loader = document.getElementById('loader');
@@ -9,7 +8,6 @@ window.addEventListener('load', () => {
     }, 300);
 });
 
-// ===== Mobile Menu =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
 if (burger) {
@@ -28,7 +26,6 @@ document.querySelectorAll('.nav__link').forEach(link => {
     });
 });
 
-// ===== Filter Buttons =====
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -38,7 +35,6 @@ filterBtns.forEach(btn => {
     });
 });
 
-// ===== Smooth Scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -49,7 +45,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== Product Gallery =====
 function initProductGalleries() {
     document.querySelectorAll('.product-gallery').forEach(gallery => {
         const track = gallery.querySelector('.product-gallery__track');
@@ -84,7 +79,6 @@ function initProductGalleries() {
     });
 }
 
-// ===== Lightbox =====
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCaption = document.getElementById('lightboxCaption');
@@ -121,7 +115,6 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') { lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; updateLightbox(); }
 });
 
-// ===== Scroll Animations =====
 function initScrollAnimations() {
     if (!('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver((entries) => {
@@ -137,7 +130,6 @@ function initScrollAnimations() {
     document.querySelectorAll('.fade-in, .process-step, .material-card').forEach(el => observer.observe(el));
 }
 
-// ===== Horizontal Slider =====
 function initHorizontalSlider() {
     const slider = document.querySelector('.products-slider');
     const prevBtn = document.querySelector('.slider-nav--prev');
@@ -154,26 +146,17 @@ function initHorizontalSlider() {
     slider.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 2; });
 }
 
-// ===== Reviews Slider =====
 function initReviewsSlider() {
     const slider = document.querySelector('.reviews-slider');
     const prevBtn = document.querySelector('.reviews-nav-prev');
     const nextBtn = document.querySelector('.reviews-nav-next');
     
     if (!slider || !prevBtn || !nextBtn) return;
-
     const scrollAmount = 370;
-
-    prevBtn.addEventListener('click', () => {
-        slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    });
-
-    nextBtn.addEventListener('click', () => {
-        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    });
+    prevBtn.addEventListener('click', () => slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => slider.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
 }
 
-// ===== Parallax =====
 function initParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -183,7 +166,6 @@ function initParallax() {
     });
 }
 
-// ===== FAQ Accordion =====
 const faqItems = document.querySelectorAll('.faq-item');
 faqItems.forEach(item => {
     const question = item.querySelector('.faq-question');
@@ -194,7 +176,6 @@ faqItems.forEach(item => {
     });
 });
 
-// ===== Render Products =====
 window.renderProducts = function(filter = 'all') {
     const grid = document.getElementById('productsGrid');
     if (!grid || typeof products === 'undefined') return;
@@ -219,9 +200,9 @@ window.renderProducts = function(filter = 'all') {
             <div class="product-card__content">
                 <h3 class="product-card__title">${product.name}</h3>
                 <div class="product-card__specs">
-                    ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
+                    ${product.length && product.length !== '-' ? `<span class="spec"> ${product.length}</span>` : ''}
                     ${product.weight && product.weight !== '-' ? `<span class="spec">⚖️ ${product.weight}</span>` : ''}
-                    ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
+                    ${product.depth && product.depth !== '-' ? `<span class="spec"> ${product.depth}</span>` : ''}
                 </div>
                 <p class="product-card__price">${product.price} ₽</p>
                 <div class="product-card__buttons">
@@ -234,7 +215,6 @@ window.renderProducts = function(filter = 'all') {
     setTimeout(() => { initProductGalleries(); }, 100);
 };
 
-// ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof products !== 'undefined') {
         window.renderProducts('all');
