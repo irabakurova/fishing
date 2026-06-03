@@ -42,9 +42,9 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     font-weight: 400;
-    overflow-x: hidden;
+    overflow-x: hidden; /* ИСПРАВЛЕНО: убираем горизонтальный скролл */
 }
-section { margin: 0; }
+section { margin: 0; overflow-x: hidden; } /* ИСПРАВЛЕНО */
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 
@@ -509,13 +509,28 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     50% { margin-top: -3px; }
 }
 
-/* ===== Reviews Section ===== */
-.reviews { padding: var(--spacing-xl) 0; background: var(--color-white); }
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* ===== Reviews Section (ИСПРАВЛЕНО: ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
+.reviews { padding: var(--spacing-xl) 0; background: var(--color-white); position: relative; }
+.reviews--horizontal .reviews-slider {
+    display: flex;
     gap: var(--spacing-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 10px);
+    margin: 0 calc(-1 * var(--spacing-md));
 }
+.reviews--horizontal .reviews-slider::-webkit-scrollbar { display: none; }
+.reviews--horizontal .review-card {
+    flex: 0 0 350px;
+    scroll-snap-align: start;
+}
+.reviews-nav-prev { left: 10px; }
+.reviews-nav-next { right: 10px; }
+
 .review-card {
     background: var(--color-bg);
     padding: var(--spacing-md);
@@ -530,9 +545,15 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .review-card__product { font-size: 0.85rem; color: var(--color-accent); font-weight: 500; }
 .review-card__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; font-style: italic; }
 
-/* ===== FAQ Section ===== */
+/* ===== FAQ Section (ИСПРАВЛЕНО: СЕТКА 2x2) ===== */
 .faq { padding: var(--spacing-xl) 0; background: var(--color-bg); }
-.faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    max-width: 900px;
+    margin: 0 auto;
+}
 .faq-item { background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
 .faq-question {
     width: 100%; padding: var(--spacing-md); background: none; border: none;
@@ -744,6 +765,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .hero__stats { flex-wrap: wrap; gap: var(--spacing-sm); }
     .stat-divider { display: none; }
     .cta__box { flex-direction: column; text-align: center; }
+    .faq-grid { grid-template-columns: 1fr; } /* На планшетах 1 колонка */
 }
 @media (max-width: 640px) {
     :root { --spacing-lg: 3rem; --spacing-xl: 5rem; }
@@ -761,4 +783,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .fish-1 { top: 70%; }
     .fish-2 { top: 76%; }
     .fish-3 { top: 80%; }
+    
+    .reviews--horizontal .review-card { flex: 0 0 85vw; }
 }

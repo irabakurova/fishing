@@ -154,6 +154,25 @@ function initHorizontalSlider() {
     slider.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 2; });
 }
 
+// ===== Reviews Slider =====
+function initReviewsSlider() {
+    const slider = document.querySelector('.reviews-slider');
+    const prevBtn = document.querySelector('.reviews-nav-prev');
+    const nextBtn = document.querySelector('.reviews-nav-next');
+    
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = 370;
+
+    prevBtn.addEventListener('click', () => {
+        slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+}
+
 // ===== Parallax =====
 function initParallax() {
     window.addEventListener('scroll', () => {
@@ -227,5 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initScrollAnimations();
     initHorizontalSlider();
+    initReviewsSlider();
     initParallax();
 });

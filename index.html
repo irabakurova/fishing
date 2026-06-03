@@ -100,13 +100,17 @@
     </section>
 
     <!-- ОТЗЫВЫ -->
-    <section id="reviews" class="reviews fade-in">
+    <section id="reviews" class="reviews reviews--horizontal fade-in">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Отзывы рыбаков</h2>
                 <p class="section-subtitle">Честные впечатления от наших воблеров</p>
             </div>
-            <div class="reviews-grid">
+            
+            <button class="slider-nav slider-nav--prev reviews-nav-prev" aria-label="Предыдущие отзывы">&#10094;</button>
+            <button class="slider-nav slider-nav--next reviews-nav-next" aria-label="Следующие отзывы">&#10095;</button>
+            
+            <div class="reviews-slider">
                 <div class="review-card">
                     <div class="review-card__header">
                         <div class="review-card__avatar">🎣</div>
@@ -235,7 +239,7 @@
                 <h2 class="section-title">Частые вопросы</h2>
                 <p class="section-subtitle">Ответы на популярные вопросы о заказе и доставке</p>
             </div>
-            <div class="faq-list">
+            <div class="faq-grid">
                 <div class="faq-item">
                     <button class="faq-question"><span>Сколько времени изготовление?</span><span class="faq-icon">+</span></button>
                     <div class="faq-answer"><p>Обычно изготовление занимает около 2 недель с момента согласования заказа. Точные сроки зависят от текущей загрузки мастерской.</p></div>

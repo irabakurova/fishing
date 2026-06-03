@@ -1,45 +1,45 @@
 const products = [
     {
         id: 1,
-        name: "Воблер шкатулка / Casket",
+        name: "Caterpillar",
         type: "minnow",
-        length: "63мм",
+        length: "65мм",
         weight: "6.5г",
-        depth: "-",
-        price: "-",
-        status: "made-to-order",
+        depth: "0.5-1.2м",
+        price: "1599",
+        status: "in-stock",
+        stockCount: "1 шт",
         images: [
             "img/products/lure-1-1.jpg",
             "img/products/lure-1-2.jpg",
             "img/products/lure-1-3.jpg"
         ],
-        description: "Компактный воблер с уникальной игрой"
+        description: "Уловистый воблер класса минноу"
     },
     {
         id: 2,
-        name: "Caterpillar",
+        name: "Воблер шкатулка / Casket",
         type: "minnow",
-        length: "-",
-        weight: "-",
-        depth: "-",
-        price: "-",
-        status: "in-stock",
-        stockCount: "1 шт",
+        length: "63мм",
+        weight: "6.5г",
+        depth: "0.8-1.5м",
+        price: "1599",
+        status: "made-to-order",
         images: [
             "img/products/lure-2-1.jpg",
             "img/products/lure-2-2.jpg",
             "img/products/lure-2-3.jpg"
         ],
-        description: "В наличии"
+        description: "Уникальная конструкция в виде шкатулки"
     },
     {
         id: 3,
-        name: "Bowie 50mm",
+        name: "Bowie",
         type: "minnow",
         length: "50мм",
-        weight: "-",
-        depth: "-",
-        price: "-",
+        weight: "4.2г",
+        depth: "0.3-0.8м",
+        price: "1599",
         status: "made-to-order",
         images: [
             "img/products/lure-3-1.jpg",
@@ -50,12 +50,12 @@ const products = [
     },
     {
         id: 4,
-        name: "Eden 60",
+        name: "Eden",
         type: "minnow",
         length: "60мм",
-        weight: "-",
-        depth: "-",
-        price: "-",
+        weight: "5.8г",
+        depth: "0.6-1.3м",
+        price: "1599",
         status: "made-to-order",
         images: [
             "img/products/lure-4-1.jpg",
