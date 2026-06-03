@@ -438,7 +438,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-steps {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--spacing-md); position: relative; z-index: 2; /* Текст поверх рыбок */
+    gap: var(--spacing-md); position: relative; z-index: 2;
 }
 .process-step { text-align: center; padding: var(--spacing-md); position: relative; }
 .process-step__icon {
@@ -458,42 +458,40 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== Swimming Fish Animation (ИСПРАВЛЕНО - рыбки внутри серой волны) ===== */
+/* ===== Swimming Fish Animation (ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ) ===== */
 .swimming-fish {
     position: absolute;
     width: 70px;
     height: 35px;
-    z-index: 1; /* Под текстом, но над фоном */
+    z-index: 1;
     pointer-events: none;
+    will-change: transform;
 }
 
 .fish-1 {
-    top: 65%; /* Опущено ниже */
+    top: 68%;
     left: -100px;
     animation: swimRight 20s linear infinite, wiggle 0.4s ease-in-out infinite;
-    opacity: 0.9;
-    mix-blend-mode: multiply;
+    opacity: 0.85;
 }
 
 .fish-2 {
-    top: 75%; /* Ещё ниже */
+    top: 74%;
     left: -100px;
     animation: swimRight 28s linear infinite, wiggle 0.5s ease-in-out infinite;
     animation-delay: -8s;
-    opacity: 0.8;
-    transform: scale(0.9);
-    mix-blend-mode: multiply;
+    opacity: 0.75;
+    transform: scale(0.85);
 }
 
 .fish-3 {
-    top: 80%; /* Самая нижняя */
+    top: 78%;
     right: -100px;
     left: auto;
     animation: swimLeft 22s linear infinite, wiggle 0.45s ease-in-out infinite;
     animation-delay: -4s;
-    opacity: 0.85;
+    opacity: 0.8;
     transform: scale(1.1) scaleX(-1);
-    mix-blend-mode: multiply;
 }
 
 @keyframes swimRight {
@@ -508,7 +506,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 
 @keyframes wiggle {
     0%, 100% { margin-top: 0; }
-    50% { margin-top: -4px; }
+    50% { margin-top: -3px; }
 }
 
 /* ===== Materials Section ===== */
@@ -714,8 +712,12 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .products-slider .product-card { flex: 0 0 85vw; }
     .slider-nav { width: 36px; height: 36px; font-size: 1rem; }
     
+    /* Исправление рыбок для мобильных */
     .swimming-fish {
         width: 50px;
         height: 25px;
     }
+    .fish-1 { top: 70%; }
+    .fish-2 { top: 76%; }
+    .fish-3 { top: 80%; }
 }
