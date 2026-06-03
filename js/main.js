@@ -6,15 +6,24 @@ window.addEventListener('load', () => {
     }, 500);
 });
 
-// ===== Mobile Menu =====
+// ===== Mobile Menu (ИСПРАВЛЕНО) =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
 if (burger) {
     burger.addEventListener('click', () => {
-        nav.classList.toggle('nav--active');
+        const isActive = nav.classList.toggle('nav--active');
         burger.classList.toggle('burger--active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
     });
 }
+// Закрываем меню при клике на любую ссылку
+document.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('nav--active');
+        burger.classList.remove('burger--active');
+        document.body.style.overflow = '';
+    });
+});
 
 // ===== Filter Buttons =====
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -35,8 +44,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            nav?.classList.remove('nav--active');
-            burger?.classList.remove('burger--active');
         }
     });
 });
@@ -181,9 +188,9 @@ window.renderProducts = function(filter = 'all') {
             <div class="product-card__content">
                 <h3 class="product-card__title">${product.name}</h3>
                 <div class="product-card__specs">
-                    ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
+                    ${product.length && product.length !== '-' ? `<span class="spec"> ${product.length}</span>` : ''}
                     ${product.weight && product.weight !== '-' ? `<span class="spec">⚖️ ${product.weight}</span>` : ''}
-                    ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
+                    ${product.depth && product.depth !== '-' ? `<span class="spec"> ${product.depth}</span>` : ''}
                 </div>
                 <div class="product-card__buttons">
                     <a href="https://t.me/ShustSPB?text=Здравствуйте! Интересует: ${encodeURIComponent(product.name)}" target="_blank" class="product-card__btn product-card__btn--tg"><span>✈</span><span>Узнать цену и заказать</span></a>

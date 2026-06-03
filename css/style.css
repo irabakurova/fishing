@@ -107,6 +107,8 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     font-weight: 700; color: var(--color-dark);
 }
 .logo__text--footer { font-size: 1.4rem; color: var(--color-white); }
+
+/* Desktop Nav */
 .nav { display: flex; gap: var(--spacing-md); align-items: center; }
 .nav__link {
     font-size: 0.95rem; font-weight: 500; color: var(--color-text);
@@ -119,11 +121,37 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .nav__link:hover { color: var(--color-accent); }
 .nav__link:hover::after { width: 100%; }
+
+/* Burger Button */
 .burger {
     display: none; flex-direction: column; gap: 5px;
     background: none; border: none; cursor: pointer; padding: var(--spacing-xs);
+    z-index: 1001;
 }
-.burger span { width: 25px; height: 2px; background: var(--color-dark); transition: var(--transition); }
+.burger span { width: 25px; height: 2px; background: var(--color-dark); transition: var(--transition); display: block; }
+
+/* ===== Mobile Menu Active State (ИСПРАВЛЕНО) ===== */
+.nav--active {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(248, 244, 232, 0.98);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    animation: slideDown 0.3s ease;
+}
+.nav--active .nav__link { font-size: 1.8rem; font-weight: 600; }
+
+/* Burger Animation */
+.burger--active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger--active span:nth-child(2) { opacity: 0; }
+.burger--active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===== Hero Section ===== */
 .hero {
@@ -534,37 +562,28 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .contact-card__arrow { font-size: 1.5rem; color: var(--color-text-light); transition: var(--transition); }
 .contact-card:hover .contact-card__arrow { color: var(--color-accent); transform: translateX(4px); }
 
-/* ===== Footer (ИСПРАВЛЕНО: ВОЛНА ВОЗВРАЩЕНА) ===== */
+/* ===== Footer ===== */
 .footer {
     position: relative;
-    /* Увеличиваем отступ сверху, чтобы волна не перекрывала текст */
     padding: 6rem 0 2rem; 
     background: var(--color-dark);
     color: var(--color-white);
     margin-top: 0;
-    overflow: visible; /* Разрешаем волне выходить, если нужно */
+    overflow: visible;
 }
-
 .footer__wave {
     position: absolute;
-    /* Ставим волну в самый верх блока */
-    top: 0; 
-    left: 0; 
-    right: 0;
-    /* Сдвигаем волну чуть вверх, чтобы она "наезжала" на предыдущий блок */
+    top: 0; left: 0; right: 0;
     transform: translateY(-99%); 
     line-height: 0;
-    z-index: 10; /* Поверх фона подвала */
+    z-index: 10;
 }
 .footer__wave svg {
-    display: block;
-    width: 100%;
-    height: auto;
+    display: block; width: 100%; height: auto;
 }
-
 .footer__container {
     display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 11; /* Текст поверх волны */
+    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 11;
 }
 .footer__left { display: flex; flex-direction: column; gap: var(--spacing-xs); }
 .footer__text { font-size: 0.9rem; opacity: 0.7; }
@@ -608,7 +627,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 
 /* ===== Responsive ===== */
 @media (max-width: 968px) {
-    .header__container { gap: var(--spacing-sm); }
     .nav { display: none; }
     .btn--header { display: none; }
     .burger { display: flex; }
