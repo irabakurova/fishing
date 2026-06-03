@@ -420,7 +420,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section (ИСПРАВЛЕНО) ===== */
+/* ===== Process Section ===== */
 .process { 
     position: relative; 
     padding: var(--spacing-xl) 0; 
@@ -458,7 +458,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== Swimming Fish Animation (ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ) ===== */
+/* ===== Swimming Fish Animation ===== */
 .swimming-fish {
     position: absolute;
     width: 70px;
@@ -508,6 +508,51 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     0%, 100% { margin-top: 0; }
     50% { margin-top: -3px; }
 }
+
+/* ===== Reviews Section ===== */
+.reviews { padding: var(--spacing-xl) 0; background: var(--color-white); }
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+.review-card {
+    background: var(--color-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+.review-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.review-card__header { display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
+.review-card__avatar { width: 50px; height: 50px; background: var(--color-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.review-card__name { font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-dark); }
+.review-card__product { font-size: 0.85rem; color: var(--color-accent); font-weight: 500; }
+.review-card__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; font-style: italic; }
+
+/* ===== FAQ Section ===== */
+.faq { padding: var(--spacing-xl) 0; background: var(--color-bg); }
+.faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.faq-item { background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+.faq-question {
+    width: 100%; padding: var(--spacing-md); background: none; border: none;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; font-family: var(--font-body); font-size: 1.05rem; font-weight: 500;
+    color: var(--color-dark); text-align: left;
+}
+.faq-question:hover { color: var(--color-accent); }
+.faq-icon {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--color-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 300; transition: var(--transition); flex-shrink: 0;
+}
+.faq-item.active .faq-icon { transform: rotate(45deg); background: var(--color-accent); color: white; }
+.faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease;
+    padding: 0 var(--spacing-md);
+}
+.faq-item.active .faq-answer { max-height: 200px; padding-bottom: var(--spacing-md); }
+.faq-answer p { color: var(--color-text-light); line-height: 1.6; }
 
 /* ===== Materials Section ===== */
 .materials { padding: var(--spacing-xl) 0; background: var(--color-bg); }
@@ -712,11 +757,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .products-slider .product-card { flex: 0 0 85vw; }
     .slider-nav { width: 36px; height: 36px; font-size: 1rem; }
     
-    /* Исправление рыбок для мобильных */
-    .swimming-fish {
-        width: 50px;
-        height: 25px;
-    }
+    .swimming-fish { width: 50px; height: 25px; }
     .fish-1 { top: 70%; }
     .fish-2 { top: 76%; }
     .fish-3 { top: 80%; }

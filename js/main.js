@@ -4,15 +4,12 @@ window.addEventListener('load', () => {
         const loader = document.getElementById('loader');
         if (loader) {
             loader.classList.add('hidden');
-            // Полностью удаляем лоадер из DOM после анимации
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 300);
+            setTimeout(() => { loader.style.display = 'none'; }, 300);
         }
-    }, 300); // Показываем минимум 300мс
+    }, 300);
 });
 
-// ===== Mobile Menu (ИСПРАВЛЕНО) =====
+// ===== Mobile Menu =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
 if (burger) {
@@ -23,7 +20,6 @@ if (burger) {
     });
 }
 
-// Закрываем меню при клике на любую ссылку
 document.querySelectorAll('.nav__link').forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('nav--active');
@@ -49,9 +45,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (href === '#') return;
         e.preventDefault();
         const target = document.querySelector(href);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
@@ -170,6 +164,17 @@ function initParallax() {
     });
 }
 
+// ===== FAQ Accordion =====
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+    });
+});
+
 // ===== Render Products =====
 window.renderProducts = function(filter = 'all') {
     const grid = document.getElementById('productsGrid');
@@ -199,9 +204,10 @@ window.renderProducts = function(filter = 'all') {
                     ${product.weight && product.weight !== '-' ? `<span class="spec">⚖️ ${product.weight}</span>` : ''}
                     ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
                 </div>
+                <p class="product-card__price">${product.price} ₽</p>
                 <div class="product-card__buttons">
                     <a href="https://t.me/ShustSPB?text=Здравствуйте! Интересует: ${encodeURIComponent(product.name)}" target="_blank" class="product-card__btn product-card__btn--tg"><span>✈</span><span>Узнать цену и заказать</span></a>
-                    <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" target="_blank" class="product-card__btn product-card__btn--avito"><span></span><span>Смотреть на Avito</span></a>
+                    <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" target="_blank" class="product-card__btn product-card__btn--avito"><span>🛒</span><span>Смотреть на Avito</span></a>
                 </div>
             </div>
         </article>`;
