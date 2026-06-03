@@ -44,8 +44,7 @@ body {
     font-weight: 400;
     overflow-x: hidden;
 }
-/* Гарантируем отсутствие отступов между секциями */
-section { margin: 0; }
+section { margin: 0; padding: 0; }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 
@@ -179,21 +178,9 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
 }
 .hero__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    position: absolute; top: 0; left: 0; z-index: 0;
 }
-.hero__placeholder {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; color: var(--color-text-light);
-    background: linear-gradient(135deg, var(--color-water) 0%, var(--color-bg) 100%);
-}
-.placeholder__icon { font-size: 5rem; margin-bottom: var(--spacing-sm); opacity: 0.5; }
 .hero__deco { position: absolute; pointer-events: none; z-index: 1; }
 .hero__deco--1 {
     top: -30px; right: -30px; width: 150px; height: 150px;
@@ -207,18 +194,17 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .hero__fish--1 { top: 20%; left: 10%; animation: swim 8s ease-in-out infinite, float 6s ease-in-out infinite; }
 .hero__fish--2 { bottom: 25%; right: 8%; animation: swim 10s ease-in-out infinite reverse, float 7s ease-in-out infinite 1s; }
 
-/* ===== Catalog Horizontal (ИСПРАВЛЕНО) ===== */
+/* ===== Catalog Horizontal (ИСПРАВЛЕНО: УБРАНЫ БОРТИКИ) ===== */
 .catalog--horizontal {
     padding: var(--spacing-xl) 0;
-    overflow: hidden;
     background: var(--color-bg);
-    border: none !important;
+    overflow: hidden; /* Скрывает выступающие края */
 }
 
 .catalog__wrapper {
     position: relative;
-    /* Разрешаем контенту выходить за пределы контейнера */
-    overflow: visible; 
+    /* Разрешаем слайдеру выходить за границы контейнера */
+    overflow: visible !important; 
 }
 
 .products-slider {
@@ -228,28 +214,28 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    /* Убираем скроллбар для чистоты, но оставляем функционал */
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /* Выносим слайдер за пределы контейнера */
+    /* Выносим слайдер за пределы контейнера на величину padding страницы */
     margin-left: calc(-1 * var(--spacing-md));
     margin-right: calc(-1 * var(--spacing-md));
-    padding-left: var(--spacing-md);
-    padding-right: var(--spacing-md);
-    padding-bottom: calc(var(--spacing-md) + 10px);
-    /* ЖЕСТКО УБИРАЕМ ЛЮБЫЕ РАМКИ И ТЕНИ */
+    padding: 20px var(--spacing-md);
+    /* ЖЕСТКОЕ УДАЛЕНИЕ ВСЕХ РАМОК И ФОНОВ */
     border: none !important;
+    outline: none !important;
     box-shadow: none !important;
     background: transparent !important;
 }
-
 .products-slider::-webkit-scrollbar { display: none; }
 
 .products-slider .product-card {
-    flex: 0 0 320px; /* Чуть уже для лучшего вида на мобильных */
+    flex: 0 0 320px;
     scroll-snap-align: start;
     margin-bottom: 0;
-    border: none !important; /* Убираем бортики у самих карточек */
+    /* Убираем рамки у самих карточек */
+    border: none !important;
+    outline: none !important;
+    box-shadow: var(--shadow-md);
 }
 
 .slider-nav {
@@ -270,97 +256,59 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     transition: var(--transition);
     z-index: 10;
 }
-
-.slider-nav:hover {
-    background: var(--color-accent);
-    color: white;
-    border-color: var(--color-accent);
-}
-
+.slider-nav:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); }
 .slider-nav--prev { left: 10px; }
 .slider-nav--next { right: 10px; }
 
-.slider-indicator { display: none; }
-
 /* ===== Filters ===== */
 .filters {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-    flex-wrap: wrap;
+    display: flex; justify-content: center; gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg); flex-wrap: wrap;
 }
-
 .filter-btn {
-    padding: 12px 28px;
-    background: var(--color-white);
-    border: 2px solid transparent;
-    border-radius: 30px;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    color: var(--color-text);
+    padding: 12px 28px; background: var(--color-white);
+    border: 2px solid transparent; border-radius: 30px;
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: var(--transition); color: var(--color-text);
     box-shadow: var(--shadow-sm);
 }
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--color-dark);
-    color: var(--color-white);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+.filter-btn:hover, .filter-btn.active {
+    background: var(--color-dark); color: var(--color-white);
+    transform: translateY(-2px); box-shadow: var(--shadow-md);
 }
 
 /* ===== Scroll Animations ===== */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-.stagger-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
+.stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 .stagger-item.visible { opacity: 1; transform: translateY(0); }
 
-/* ===== Enhanced Animations ===== */
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+/* ===== Animations ===== */
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
+@keyframes swim {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(20px) translateY(-10px); }
+    50% { transform: translateX(0) translateY(0); }
+    75% { transform: translateX(-20px) translateY(10px); }
 }
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
 .hero__title { animation: fadeInUp 1s ease-out; }
 .hero__subtitle { animation: fadeInUp 1s ease-out 0.2s backwards; }
 .hero__buttons { animation: fadeInUp 1s ease-out 0.4s backwards; }
 .hero__stats { animation: fadeInUp 1s ease-out 0.6s backwards; }
-
 .process-step { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
 .process-step.visible { opacity: 1; transform: translateY(0); }
-
 .material-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
 .material-card.visible { opacity: 1; transform: translateY(0); }
-
 .product-card { animation: scaleIn 0.6s ease-out backwards; }
 .product-card:nth-child(1) { animation-delay: 0.1s; }
 .product-card:nth-child(2) { animation-delay: 0.2s; }
 .product-card:nth-child(3) { animation-delay: 0.3s; }
 .product-card:nth-child(4) { animation-delay: 0.4s; }
-
 .product-card:hover .product-gallery__slide img { transform: scale(1.1) rotate(2deg); }
-
 .parallax { will-change: transform; }
 
 /* ===== Product Card ===== */
@@ -382,7 +330,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .product-gallery__slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .product-gallery__slide:hover img { transform: scale(1.05); }
-.product-gallery__placeholder { color: var(--color-text-light); text-align: center; padding: var(--spacing-md); }
 .product-gallery__nav {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 36px; height: 36px; border: none; border-radius: 50%;
@@ -452,7 +399,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section (ИСПРАВЛЕНО) ===== */
+/* ===== Process Section (ИСПРАВЛЕНО: ВОЛНА ВНИЗУ) ===== */
 .process { 
     position: relative; 
     padding: var(--spacing-xl) 0; 
@@ -462,16 +409,11 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .process__bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-    pointer-events: none;
+    height: 100%; width: 100%;
+    z-index: 0; pointer-events: none;
 }
-/* SVG теперь растягивается на весь блок */
 .process__bg svg {
-    width: 100%;
-    height: 100%;
-    display: block;
+    width: 100%; height: 100%; display: block;
 }
 .process-steps {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -611,25 +553,30 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .contact-card__arrow { font-size: 1.5rem; color: var(--color-text-light); transition: var(--transition); }
 .contact-card:hover .contact-card__arrow { color: var(--color-accent); transform: translateX(4px); }
 
-/* ===== Footer (ИСПРАВЛЕНО) ===== */
+/* ===== Footer (ИСПРАВЛЕНО: ВОЛНА ВОЗВРАЩЕНА) ===== */
 .footer {
     position: relative;
-    padding: 4rem 0 2rem; /* Фиксированный паддинг */
+    padding: 5rem 0 2rem; /* Больше отступа сверху, чтобы волна не наезжала на текст */
     background: var(--color-dark);
     color: var(--color-white);
-    margin-top: 0; /* Убираем разрывы */
+    margin-top: 0;
+    overflow: visible; /* Разрешаем волне выходить за пределы, если нужно */
 }
-/* Волна подтянута вплотную к контенту */
 .footer__wave {
     position: absolute;
-    top: -2px;
+    top: -1px; /* Прижимаем к самому верху */
     left: 0; right: 0;
     line-height: 0;
-    transform: translateY(-1px); /* Перекрывает микро-зазор */
+    z-index: 10;
+}
+.footer__wave svg {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 .footer__container {
     display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 1;
+    flex-wrap: wrap; gap: var(--spacing-md); position: relative; z-index: 11;
 }
 .footer__left { display: flex; flex-direction: column; gap: var(--spacing-xs); }
 .footer__text { font-size: 0.9rem; opacity: 0.7; }
@@ -671,16 +618,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-/* ===== Animations ===== */
-@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.8; } }
-@keyframes swim {
-    0%, 100% { transform: translateX(0) translateY(0); }
-    25% { transform: translateX(20px) translateY(-10px); }
-    50% { transform: translateX(0) translateY(0); }
-    75% { transform: translateX(-20px) translateY(10px); }
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 968px) {
     .header__container { gap: var(--spacing-sm); }
@@ -703,13 +640,6 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .contacts-grid { grid-template-columns: 1fr; }
     .footer__container { flex-direction: column; text-align: center; }
     
-    .products-slider .product-card {
-        flex: 0 0 85vw; /* На мобильном карточка почти на весь экран */
-    }
-    
-    .slider-nav {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
+    .products-slider .product-card { flex: 0 0 85vw; }
+    .slider-nav { width: 36px; height: 36px; font-size: 1rem; }
 }
