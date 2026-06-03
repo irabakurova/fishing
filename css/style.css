@@ -551,7 +551,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .review-card__product { font-size: 0.85rem; color: var(--color-accent); font-weight: 500; }
 .review-card__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.6; font-style: italic; }
 
-/* ===== FAQ Section ===== */
+/* ===== FAQ Section (ИСПРАВЛЕНО: ABSOLUTE POSITIONING) ===== */
 .faq { padding: var(--spacing-xl) 0; background: var(--color-bg); }
 .faq-grid {
     display: flex;
@@ -565,11 +565,19 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     min-width: 280px;
     background: var(--color-white);
     border-radius: var(--radius-md);
-    overflow: hidden;
     box-shadow: var(--shadow-sm);
-    min-height: 120px;
+    /* ИСПРАВЛЕНИЕ: Убираем overflow hidden, чтобы ответ мог вылезать вниз */
+    overflow: visible; 
+    position: relative;
+    z-index: 1;
     transition: box-shadow 0.3s ease;
 }
+/* ИСПРАВЛЕНИЕ: Добавляем тень только при открытии */
+.faq-item.active {
+    box-shadow: var(--shadow-lg);
+    z-index: 10; /* Поднимаем открытый элемент выше остальных */
+}
+
 .faq-question {
     width: 100%; padding: var(--spacing-md); background: none; border: none;
     display: flex; justify-content: space-between; align-items: center;
@@ -583,11 +591,29 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     font-size: 1.2rem; font-weight: 300; transition: var(--transition); flex-shrink: 0;
 }
 .faq-item.active .faq-icon { transform: rotate(45deg); background: var(--color-accent); color: white; }
+
+/* ИСПРАВЛЕНИЕ: Ответ теперь абсолютный и не влияет на высоту соседей */
 .faq-answer {
-    max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease;
+    position: absolute;
+    top: 100%; /* Начинается сразу под вопросом */
+    left: 0;
+    right: 0;
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.4s ease-out, padding 0.4s ease;
     padding: 0 var(--spacing-md);
+    background: var(--color-white);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    /* Чтобы текст не прыгал */
+    opacity: 0; 
 }
-.faq-item.active .faq-answer { max-height: 300px; padding-bottom: var(--spacing-md); }
+
+.faq-item.active .faq-answer { 
+    max-height: 300px; 
+    padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md); 
+    opacity: 1;
+}
+
 .faq-answer p { color: var(--color-text-light); line-height: 1.6; }
 
 /* ===== Materials Section ===== */
