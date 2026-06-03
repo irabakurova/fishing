@@ -133,12 +133,12 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     transition: var(--transition); display: block; border-radius: 2px;
 }
 
-/* ===== Mobile Menu (ИСПРАВЛЕНО) ===== */
+/* ===== Mobile Menu ===== */
 .nav--active {
     display: flex !important;
     flex-direction: column;
     position: fixed;
-    top: 70px; /* Отступ под шапку */
+    top: 70px; 
     left: 0; right: 0;
     background: rgba(248, 244, 232, 0.98);
     backdrop-filter: blur(10px);
@@ -420,12 +420,12 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 .note__icon { font-size: 1.5rem; }
 .catalog__note p { color: var(--color-text); font-weight: 500; }
 
-/* ===== Process Section ===== */
+/* ===== Process Section (ИСПРАВЛЕНО) ===== */
 .process { 
     position: relative; 
     padding: var(--spacing-xl) 0; 
     background: var(--color-bg);
-    overflow: hidden;
+    overflow: visible !important; /* Рыбки не будут обрезаться */
 }
 .process__bg {
     position: absolute;
@@ -457,6 +457,57 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     margin-bottom: var(--spacing-xs); color: var(--color-dark);
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
+
+/* ===== Swimming Fish Animation ===== */
+.swimming-fish {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    z-index: 10; /* Выше фона */
+    pointer-events: none;
+    /* Движение + Виляние хвостом */
+}
+
+.fish-1 {
+    top: 35%;
+    left: -100px;
+    animation: swimRight 20s linear infinite, wiggle 0.4s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.fish-2 {
+    top: 50%;
+    left: -100px;
+    animation: swimRight 28s linear infinite, wiggle 0.5s ease-in-out infinite;
+    animation-delay: -8s;
+    opacity: 0.5;
+    transform: scale(0.8); /* Чуть меньше */
+}
+
+.fish-3 {
+    top: 65%;
+    right: -100px;
+    left: auto;
+    animation: swimLeft 22s linear infinite, wiggle 0.45s ease-in-out infinite;
+    animation-delay: -4s;
+    opacity: 0.6;
+    transform: scale(1.2) scaleX(-1); /* Больше и перевернута влево */
+}
+
+@keyframes swimRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+@keyframes swimLeft {
+    0% { transform: translateX(0) scaleX(-1); }
+    100% { transform: translateX(calc(100vw + 200px)) scaleX(-1); }
+}
+
+@keyframes wiggle {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -4px; }
+}
 
 /* ===== Materials Section ===== */
 .materials { padding: var(--spacing-xl) 0; background: var(--color-bg); }
@@ -660,136 +711,9 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     
     .products-slider .product-card { flex: 0 0 85vw; }
     .slider-nav { width: 36px; height: 36px; font-size: 1rem; }
-}
-/* ===== Swimming Fish Animation ===== */
-.swimming-fish {
-    position: absolute;
-    top: 40%;
-    left: -100px;
-    width: 80px;
-    height: 40px;
-    z-index: 1;
-    animation: swimAcross 15s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes swimAcross {
-    0% {
-        transform: translateX(0) translateY(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px)) translateY(-20px);
-        opacity: 0;
-    }
-}
-/* ===== Swimming Fish Animation (УЛУЧШЕНО) ===== */
-.swimming-fish {
-    position: absolute;
-    width: 70px;
-    height: 35px;
-    z-index: 2; /* Поверх волны, но под контентом */
-    pointer-events: none;
-    /* Анимация плавания + виляния хвостом */
-    animation: swimAcross 18s linear infinite, wiggle 0.3s ease-in-out infinite;
-}
-
-/* Позиции и задержки для 3 рыбок */
-.fish-1 {
-    top: 35%;
-    left: -100px;
-    animation-delay: 0s, 0s;
-    animation-duration: 20s, 0.25s;
-    transform: scaleX(1); /* Плывёт вправо */
-}
-
-.fish-2 {
-    top: 50%;
-    left: -100px;
-    animation-delay: -7s, 0.1s; /* Стартует с задержкой */
-    animation-duration: 25s, 0.3s;
-    transform: scaleX(1);
-    opacity: 0.8;
-}
-
-.fish-3 {
-    top: 60%;
-    left: -100px;
-    animation-delay: -12s, 0.2s;
-    animation-duration: 22s, 0.35s;
-    transform: scaleX(-1); /* Плывёт влево для разнообразия */
-    opacity: 0.6;
-}
-
-/* Движение рыбки слева направо */
-@keyframes swimAcross {
-    0% {
-        transform: translateX(0) translateY(0) scaleX(1);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.7;
-    }
-    50% {
-        transform: translateX(50vw) translateY(-15px) scaleX(1);
-    }
-    90% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px)) translateY(-30px) scaleX(1);
-        opacity: 0;
-    }
-}
-
-/* Виляние хвостом (тело рыбки) */
-@keyframes wiggle {
-    0%, 100% {
-        transform: translateX(0) rotate(0deg);
-    }
-    25% {
-        transform: translateX(0) rotate(-2deg);
-    }
-    75% {
-        transform: translateX(0) rotate(2deg);
-    }
-}
-
-/* Для рыбки, которая плывёт влево */
-.fish-3 {
-    animation-name: swimAcrossReverse, wiggle;
-}
-
-@keyframes swimAcrossReverse {
-    0% {
-        transform: translateX(calc(100vw + 100px)) translateY(0) scaleX(-1);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    50% {
-        transform: translateX(50vw) translateY(10px) scaleX(-1);
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateX(-100px) translateY(20px) scaleX(-1);
-        opacity: 0;
-    }
-}
-
-/* Адаптив: на мобильных уменьшаем рыбок */
-@media (max-width: 768px) {
+    
     .swimming-fish {
-        width: 50px;
-        height: 25px;
+        width: 40px;
+        height: 20px;
     }
 }
