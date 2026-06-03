@@ -1,3 +1,18 @@
+// ===== Loader =====
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            loader.classList.add('hidden');
+            // Полностью удаляем лоадер из DOM после анимации
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 300);
+        }
+    }, 300); // Показываем минимум 300мс
+});
+
+
 // ===== Mobile Menu (ИСПРАВЛЕНО) =====
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
