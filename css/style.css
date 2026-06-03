@@ -458,40 +458,43 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== Swimming Fish Animation ===== */
+/* ===== Swimming Fish Animation (ИСПРАВЛЕНО - рыбки внутри волны) ===== */
 .swimming-fish {
     position: absolute;
-    width: 60px;
-    height: 30px;
-    z-index: 10; /* Выше фона */
+    width: 70px;
+    height: 35px;
+    z-index: 1; /* Внутри волны, под текстом */
     pointer-events: none;
     /* Движение + Виляние хвостом */
 }
 
 .fish-1 {
-    top: 35%;
+    top: 60%; /* Опустили ниже */
     left: -100px;
     animation: swimRight 20s linear infinite, wiggle 0.4s ease-in-out infinite;
-    opacity: 0.7;
+    opacity: 0.9; /* Увеличили прозрачность */
+    mix-blend-mode: multiply; /* Чтобы рыбки сливались с фоном волны */
 }
 
 .fish-2 {
-    top: 50%;
+    top: 70%; /* Ещё ниже */
     left: -100px;
     animation: swimRight 28s linear infinite, wiggle 0.5s ease-in-out infinite;
     animation-delay: -8s;
-    opacity: 0.5;
-    transform: scale(0.8); /* Чуть меньше */
+    opacity: 0.8;
+    transform: scale(0.9);
+    mix-blend-mode: multiply;
 }
 
 .fish-3 {
-    top: 65%;
+    top: 75%; /* Самая нижняя */
     right: -100px;
     left: auto;
     animation: swimLeft 22s linear infinite, wiggle 0.45s ease-in-out infinite;
     animation-delay: -4s;
-    opacity: 0.6;
-    transform: scale(1.2) scaleX(-1); /* Больше и перевернута влево */
+    opacity: 0.85;
+    transform: scale(1.1) scaleX(-1);
+    mix-blend-mode: multiply;
 }
 
 @keyframes swimRight {
@@ -713,7 +716,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     .slider-nav { width: 36px; height: 36px; font-size: 1rem; }
     
     .swimming-fish {
-        width: 40px;
-        height: 20px;
+        width: 50px;
+        height: 25px;
     }
 }
