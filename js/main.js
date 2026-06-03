@@ -183,7 +183,7 @@ function initHorizontalSlider() {
     
     if (!slider || !prevBtn || !nextBtn) return;
 
-    const scrollAmount = 370;
+    const scrollAmount = 340; // Ширина карточки + отступ
 
     prevBtn.addEventListener('click', () => {
         slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -193,6 +193,7 @@ function initHorizontalSlider() {
         slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
 
+    // Drag to scroll (мышкой)
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -227,7 +228,7 @@ function initHorizontalSlider() {
 function initParallax() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        // Исключаем about__image-wrapper из параллакса, чтобы фото не улетало
+        // Исключаем фото мастера из параллакса, чтобы оно не "улетало"
         const parallaxElements = document.querySelectorAll('.parallax:not(.about__image-wrapper)');
         
         parallaxElements.forEach(el => {
@@ -295,7 +296,7 @@ window.renderProducts = function(filter = 'all') {
                 <span class="product-card__badge badge--${product.status}">
                     ${product.status === 'in-stock' 
                         ? (product.stockCount ? `✓ В наличии: ${product.stockCount}` : '✓ В наличии') 
-                        : '⏳ Под заказ'}
+                        : ' Под заказ'}
                 </span>
             </div>
             
@@ -304,7 +305,7 @@ window.renderProducts = function(filter = 'all') {
                 <div class="product-card__specs">
                     ${product.length && product.length !== '-' ? `<span class="spec">📏 ${product.length}</span>` : ''}
                     ${product.weight && product.weight !== '-' ? `<span class="spec">️ ${product.weight}</span>` : ''}
-                    ${product.depth && product.depth !== '-' ? `<span class="spec">🌊 ${product.depth}</span>` : ''}
+                    ${product.depth && product.depth !== '-' ? `<span class="spec"> ${product.depth}</span>` : ''}
                 </div>
                 ${product.price && product.price !== '-' ? `<p class="product-card__price">${product.price} ₽</p>` : ''}
                 <div class="product-card__buttons">
@@ -329,11 +330,11 @@ window.renderProducts = function(filter = 'all') {
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализируем каталог со всеми товарами
+    // Инициализируем каталог со ВСЕМИ товарами
     if (typeof products !== 'undefined') {
         window.renderProducts('all');
         
-        // Убеждаемся, что кнопка "Все" активна
+        // Убеждаемся, что кнопка "Все" активна при загрузке
         const defaultBtn = document.querySelector('.filter-btn[data-filter="all"]');
         if (defaultBtn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));

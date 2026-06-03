@@ -128,6 +128,7 @@
         </div>
     </section>
 
+    <!-- КАТАЛОГ -->
     <section id="catalog" class="catalog catalog--horizontal">
         <div class="container catalog__wrapper">
             <div class="section-header fade-in">
@@ -145,6 +146,7 @@
             <button class="slider-nav slider-nav--next" aria-label="Следующие товары">&#10095;</button>
             
             <div class="products-slider" id="productsGrid">
+                <!-- Товары загружаются через JS -->
             </div>
             
             <div class="catalog__note fade-in">
@@ -154,9 +156,11 @@
         </div>
     </section>
 
+    <!-- ПРОЦЕСС (С ВОЛНОЙ) -->
     <section id="process" class="process fade-in">
+        <!-- Фон с волной на всю высоту -->
         <div class="process__bg">
-            <svg viewBox="0 0 1440 100%" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 200C240 160 480 240 720 200C960 160 1200 240 1440 200V100%H0V200Z" fill="#1E3A5F" opacity="0.03"/>
             </svg>
         </div>
@@ -220,6 +224,7 @@
         </div>
     </section>
 
+    <!-- МАТЕРИАЛЫ -->
     <section id="materials" class="materials fade-in">
         <div class="container">
             <div class="section-header">
@@ -265,6 +270,7 @@
         </div>
     </section>
 
+    <!-- О МАСТЕРЕ -->
     <section id="about" class="about fade-in">
         <div class="container about__container">
             <div class="about__image-wrapper">
@@ -325,6 +331,7 @@
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta">
         <div class="container">
             <div class="cta__box fade-in">
@@ -340,6 +347,7 @@
         </div>
     </section>
 
+    <!-- КОНТАКТЫ -->
     <section id="contacts" class="contacts fade-in">
         <div class="container">
             <div class="section-header">
@@ -436,7 +444,14 @@
         </div>
     </section>
 
+    <!-- ПОДВАЛ -->
     <footer class="footer">
+        <!-- Волна перекрывает стык -->
+        <div class="footer__wave">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" fill="#1E3A5F"/>
+            </svg>
+        </div>
         <div class="container footer__container">
             <div class="footer__left">
                 <span class="logo__text logo__text--footer">РЫБА ГОРЫ ЛЕС</span>
@@ -448,11 +463,6 @@
                 <a href="https://www.avito.ru/user/5a6d1dc240a4e3a9532db07a1e536d5a/profile?id=7757798928&src=item&page_from=from_item_card&iid=7757798928" target="_blank" class="footer__link">Avito</a>
                 <a href="https://boosty.to/shustspb" target="_blank" class="footer__link">Boosty</a>
             </div>
-        </div>
-        <div class="footer__wave">
-            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" fill="#1E3A5F"/>
-            </svg>
         </div>
     </footer>
 
