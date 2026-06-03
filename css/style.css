@@ -425,7 +425,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
     position: relative; 
     padding: var(--spacing-xl) 0; 
     background: var(--color-bg);
-    overflow: visible !important; /* Рыбки не будут обрезаться */
+    overflow: visible !important;
 }
 .process__bg {
     position: absolute;
@@ -438,7 +438,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-steps {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--spacing-md); position: relative; z-index: 1;
+    gap: var(--spacing-md); position: relative; z-index: 2; /* Текст поверх рыбок */
 }
 .process-step { text-align: center; padding: var(--spacing-md); position: relative; }
 .process-step__icon {
@@ -458,26 +458,25 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 .process-step__text { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.7; }
 
-/* ===== Swimming Fish Animation (ИСПРАВЛЕНО - рыбки внутри волны) ===== */
+/* ===== Swimming Fish Animation (ИСПРАВЛЕНО - рыбки внутри серой волны) ===== */
 .swimming-fish {
     position: absolute;
     width: 70px;
     height: 35px;
-    z-index: 1; /* Внутри волны, под текстом */
+    z-index: 1; /* Под текстом, но над фоном */
     pointer-events: none;
-    /* Движение + Виляние хвостом */
 }
 
 .fish-1 {
-    top: 60%; /* Опустили ниже */
+    top: 65%; /* Опущено ниже */
     left: -100px;
     animation: swimRight 20s linear infinite, wiggle 0.4s ease-in-out infinite;
-    opacity: 0.9; /* Увеличили прозрачность */
-    mix-blend-mode: multiply; /* Чтобы рыбки сливались с фоном волны */
+    opacity: 0.9;
+    mix-blend-mode: multiply;
 }
 
 .fish-2 {
-    top: 70%; /* Ещё ниже */
+    top: 75%; /* Ещё ниже */
     left: -100px;
     animation: swimRight 28s linear infinite, wiggle 0.5s ease-in-out infinite;
     animation-delay: -8s;
@@ -487,7 +486,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 }
 
 .fish-3 {
-    top: 75%; /* Самая нижняя */
+    top: 80%; /* Самая нижняя */
     right: -100px;
     left: auto;
     animation: swimLeft 22s linear infinite, wiggle 0.45s ease-in-out infinite;
